@@ -1,4 +1,7 @@
-import 'package:check_license/pages/HomePage.dart';
+import 'package:check_license/pages/DashBored.dart';
+import 'package:check_license/pages/SelectDevices.dart';
+import 'package:check_license/pages/UpcommingExpiries.dart';
+import 'package:check_license/pages/ViewLicense.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,12 +10,16 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Homepage(),
+      initialRoute: '/',
+      routes: {
+        '/':(context)=> Dashboard(),
+        '/SelectDevice':(context)=>Selectdevices(),
+        '/UpCommingExpiries':(context)=> Upcommingexpiries(),
+        '/ViewLicense':(context)=> Viewlicense(),
+      },
     );
   }
 }
