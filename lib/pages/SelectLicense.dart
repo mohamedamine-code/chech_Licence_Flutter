@@ -1,6 +1,8 @@
 import 'package:check_license/Component/Drawer.dart';
 import 'package:check_license/Component/License.dart';
 import 'package:check_license/models/DataBsaeLicense.dart';
+import 'package:check_license/models/license.dart';
+import 'package:check_license/util/LicenseInformation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,40 +14,39 @@ class SelectLicense extends StatefulWidget {
 }
 
 class _SelectLicenseState extends State<SelectLicense> {
+
   TextEditingController _searchController = TextEditingController();
+
   Color? backgroundColor;
 
-  final List<String> _allItems = [
-    'Apple',
-    'Banana',
-    'Cherry',
-    'Date',
-    'Fig',
-    'Grape',
-    'Kiwi',
-  ];
-  List<String> _filteredItems = [];
+
+  List<License> _filteredItems = [];
+  
 
   @override
   void initState() {
+
     super.initState();
-    _filteredItems = _allItems;
+    _filteredItems = Provider.of<Databsaelicense>(context,listen: false).MyLicense;
     // tiggres the function filterSearch(); when the content of _searchController
     // change .
     _searchController.addListener(() {
       filterSearch();
     });
+    Provider.of<Databsaelicense>(context, listen: false).updateAllStates();
+
   }
 
-  void filterSearch() {
-    final query = _searchController.text.toLowerCase();
-    setState(() {
-      _filteredItems =
-          _allItems
-              .where((item) => item.toLowerCase().contains(query))
-              .toList();
-    });
-  }
+void filterSearch() {
+  final query = _searchController.text.toLowerCase();
+  final allItems = Provider.of<Databsaelicense>(context, listen: false).MyLicense;
+
+  setState(() {
+    _filteredItems = allItems.where((item) {
+      return item.name.toLowerCase().contains(query); // ✅ Correct use
+    }).toList();
+  });
+}
 
   @override
   void dispose() {
@@ -77,9 +78,9 @@ class _SelectLicenseState extends State<SelectLicense> {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 // mainAxisSpacing: 20,
                 // crossAxisSpacing: 20,
-                crossAxisCount: 2,
+                crossAxisCount: 1,
               ),
-              itemCount: Mylicense.length,
+              itemCount: _filteredItems.length,
               itemBuilder: (context, index) {
                 switch (Mylicense[index].State) {
                   case 'Valid':
@@ -92,12 +93,26 @@ class _SelectLicenseState extends State<SelectLicense> {
                     backgroundColor = Colors.red.shade300;
                     break;
                 }
+                var license = _filteredItems[index];
                 return MyLicenseClass(
                   color: backgroundColor ?? Colors.black38,
-                  startDate: Mylicense[index].StartDate,
-                  finStart: Mylicense[index].FinDate,
-                  name: Mylicense[index].name,
-                  onTap: () {},
+                  startDate: license.StartDate,
+                  finStart: license.FinDate,
+                  name: license.name,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => LicenseInformation(
+                              state: Mylicense[index].State,
+                              FinDate: Mylicense[index].FinDate,
+                              name: Mylicense[index].name,
+                              StartDate: Mylicense[index].StartDate,
+                            ),
+                      ),
+                    );
+                  },
                 );
               },
             ),

@@ -1,5 +1,6 @@
 import 'package:check_license/Component/Container.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 
 class LicenseInformation extends StatelessWidget {
@@ -17,7 +18,8 @@ class LicenseInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color? color;
-
+    String formattedStart = DateFormat('MM/dd/yyyy').format(StartDate);
+    String formattedEnd = DateFormat('MM/dd/yyyy').format(FinDate);
     switch (state) {
       case 'Valid':
         color = Colors.green.shade300;
@@ -72,7 +74,7 @@ class LicenseInformation extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        StartDate.toString(),
+                        formattedStart,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -92,7 +94,7 @@ class LicenseInformation extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        FinDate.toString(),
+                        formattedEnd,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -102,16 +104,17 @@ class LicenseInformation extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "describtion:",
+                        "Describtion:",
                         style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      const SizedBox(height: 50,),
                       Text(
                         state,
                         style: TextStyle(

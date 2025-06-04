@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MyLicenseClass extends StatelessWidget {
   String name;
@@ -16,13 +17,15 @@ class MyLicenseClass extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formattedStart = DateFormat('MM/dd/yyyy').format(startDate);
+    String formattedEnd = DateFormat('MM/dd/yyyy').format(finStart);
     return GestureDetector(
       onTap: () {
         onTap();
       },
       child: Container(
-        padding: EdgeInsets.all(20),
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(12),
@@ -31,15 +34,71 @@ class MyLicenseClass extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Icon(Icons.face),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(startDate.toString(), style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(finStart.toString(), style: TextStyle(fontWeight: FontWeight.w500)),
-                ],
-              ),
+
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Name :",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                    Text(
+                      name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Start date :",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                    Text(
+                      formattedStart,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Fin date :",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                    Text(
+                      formattedEnd,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 1),
+              ],
             ),
           ],
         ),

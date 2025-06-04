@@ -28,7 +28,7 @@ void checkDate(License x) {
     StateLicense = 'License is not currently valid';
   }
   x.State=StateLicense;
-  notifyListeners();
+
 }
 
   // List of License 
@@ -53,4 +53,12 @@ void checkDate(License x) {
     MyLicense.remove(x);
     notifyListeners();
   }
+  // to update each state of license
+  void updateAllStates() {
+  for (var license in MyLicense) {
+    checkDate(license);
+  }
+  
+}
+
 }
