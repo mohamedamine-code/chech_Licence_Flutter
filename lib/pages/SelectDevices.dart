@@ -83,7 +83,17 @@ class _SelectdevicesState extends State<Selectdevices> {
               itemBuilder: (context, index) {
                 return MyDevice(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Infromationdevice(),));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => Infromationdevice(
+                              name: device[index].name,
+                              id: device[index].id,
+                              state: device[index].State?? "null",
+                            ),
+                      ),
+                    );
                   },
                   name: device[index].name,
                   id: device[index].id,

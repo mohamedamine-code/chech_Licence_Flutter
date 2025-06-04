@@ -2,7 +2,7 @@ class Device {
   String name;
   String id;
   // String path;
-  String State;
+  String? State;
 
   Device({
     required this.State,

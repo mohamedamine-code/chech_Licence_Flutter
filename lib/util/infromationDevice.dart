@@ -2,7 +2,10 @@ import 'package:check_license/Component/Container.dart';
 import 'package:flutter/material.dart';
 
 class Infromationdevice extends StatelessWidget {
-  const Infromationdevice({super.key});
+  String name;
+  String id;
+  String state;
+  Infromationdevice({required this.id,required this.name ,required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class Infromationdevice extends StatelessWidget {
                         style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "dddd",
+                        name,
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                     ],
@@ -41,7 +44,7 @@ class Infromationdevice extends StatelessWidget {
                         style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "dddd",
+                        id,
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                     ],
@@ -55,7 +58,7 @@ class Infromationdevice extends StatelessWidget {
                         style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "dddd",
+                        state,
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                     ],
