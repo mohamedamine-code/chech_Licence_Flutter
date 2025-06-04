@@ -28,6 +28,7 @@ class MyContainer extends StatelessWidget {
       child: Row(
         children: [
             Icon(icon, color: color ?? Colors.grey),
+            const SizedBox(width: 20,),
           Text(
             data,
             style: TextStyle(

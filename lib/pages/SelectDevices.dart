@@ -1,6 +1,7 @@
 import 'package:check_license/Component/Drawer.dart';
 import 'package:check_license/Component/MyDevice.dart';
 import 'package:check_license/models/DataBase.dart';
+import 'package:check_license/util/infromationDevice.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -81,10 +82,12 @@ class _SelectdevicesState extends State<Selectdevices> {
               itemCount: device.length,
               itemBuilder: (context, index) {
                 return MyDevice(
-                  onTap: (){
-                    
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Infromationdevice(),));
                   },
-                  name: device[index].name, id: device[index].id);
+                  name: device[index].name,
+                  id: device[index].id,
+                );
               },
             ),
           ),
