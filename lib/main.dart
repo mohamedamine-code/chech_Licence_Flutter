@@ -1,11 +1,21 @@
+import 'package:check_license/models/DataBase.dart';
 import 'package:check_license/pages/DashBored.dart';
 import 'package:check_license/pages/SelectDevices.dart';
 import 'package:check_license/pages/UpcommingExpiries.dart';
 import 'package:check_license/pages/ViewLicense.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_)=>DatabaseDevices())
+    ],
+    child:const MyApp(),
+    ),
+    
+
+    );
 }
 
 class MyApp extends StatelessWidget {
