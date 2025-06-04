@@ -1,14 +1,17 @@
 import 'package:check_license/Component/Container.dart';
 import 'package:flutter/material.dart';
 
-class Infromationdevice extends StatelessWidget {
+
+class LicenseInformation extends StatelessWidget {
   String name;
-  String id;
+  DateTime StartDate;
+  DateTime FinDate;
   String state;
-  Infromationdevice({
-    required this.id,
-    required this.name,
+  LicenseInformation({
     required this.state,
+    required this.FinDate,
+    required this.name,
+    required this.StartDate,
   });
 
   @override
@@ -27,7 +30,7 @@ class Infromationdevice extends StatelessWidget {
         break;
     }
     return Scaffold(
-      appBar: AppBar(title: Text("Device Information")),
+      appBar: AppBar(title: Text("License Information")),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -62,14 +65,14 @@ class Infromationdevice extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "id:",
+                        "Start Day:",
                         style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        id,
+                        StartDate.toString(),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -82,14 +85,14 @@ class Infromationdevice extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "state:",
+                        "Fin day:",
                         style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        state,
+                        FinDate.toString(),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -110,7 +113,7 @@ class Infromationdevice extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "dddd",
+                        state,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,

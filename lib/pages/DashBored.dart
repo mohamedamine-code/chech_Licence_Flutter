@@ -9,47 +9,47 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MyDrawer(),
-      appBar:  AppBar(
+      appBar: AppBar(
         title: const Text("Dashboard"),
         centerTitle: true,
         elevation: 0,
-      
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             MyContainer(
-              data: "Total Licenses: 22",
+              height: 100,
+              data: "Total Licenses:",
+              value: "22",
               icon: Icons.description,
               color: Colors.blue,
             ),
             const SizedBox(height: 16),
-            Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MyContainer(
-                  
-                  data: "Valid: 1",
-                  icon: Icons.connected_tv,
-                  color: Colors.green,
-                ),
-                const SizedBox(height: 16),
-                MyContainer(
-                  
-                  data: "Expiring Soon: 2",
-                  icon: Icons.warning_amber_rounded,
-                  color: Colors.orange,
-                ),
-                const SizedBox(height: 16),
-                MyContainer(
-                  data: "Expired: 1",
-                  icon: Icons.cancel,
-                  color: Colors.red,
-                ),
-                const SizedBox(height: 16),
-              ],
+            MyContainer(
+              height: 100,
+              value: '11',
+              data: "Valid:",
+              icon: Icons.connected_tv,
+              color: Colors.green,
             ),
+            const SizedBox(height: 16),
+            MyContainer(
+              height: 100,
+              value: "7",
+              data: "Expiring Soon:",
+              icon: Icons.warning_amber_rounded,
+              color: Colors.orange,
+            ),
+            const SizedBox(height: 16),
+            MyContainer(
+              height: 100,
+              value: "5",
+              data: "Expired:",
+              icon: Icons.cancel,
+              color: Colors.red,
+            ),
+            const SizedBox(height: 16),
           ],
         ),
       ),

@@ -21,7 +21,7 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           MyListTile(
-            data: "Select Device",
+            data: "Select License",
             icon: Icons.device_unknown,
             onTap: () {
               

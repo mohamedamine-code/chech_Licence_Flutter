@@ -1,18 +1,17 @@
 import 'package:check_license/Component/Drawer.dart';
-import 'package:check_license/Component/MyDevice.dart';
-import 'package:check_license/models/DataBase.dart';
-import 'package:check_license/util/infromationDevice.dart';
+import 'package:check_license/Component/License.dart';
+import 'package:check_license/models/DataBsaeLicense.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Selectdevices extends StatefulWidget {
-  const Selectdevices({super.key});
+class SelectLicense extends StatefulWidget {
+  const SelectLicense({super.key});
 
   @override
-  State<Selectdevices> createState() => _SelectdevicesState();
+  State<SelectLicense> createState() => _SelectLicenseState();
 }
 
-class _SelectdevicesState extends State<Selectdevices> {
+class _SelectLicenseState extends State<SelectLicense> {
   TextEditingController _searchController = TextEditingController();
   Color? backgroundColor;
 
@@ -56,9 +55,9 @@ class _SelectdevicesState extends State<Selectdevices> {
 
   @override
   Widget build(BuildContext context) {
-    final device = context.watch<DatabaseDevices>().getMydevices;
+    final Mylicense = context.watch<Databsaelicense>().getLicense;
     return Scaffold(
-      appBar: AppBar(title: Text("Select devices"), centerTitle: true),
+      appBar: AppBar(title: Text("Select License"), centerTitle: true),
       drawer: MyDrawer(),
       body: Column(
         children: [
@@ -80,9 +79,9 @@ class _SelectdevicesState extends State<Selectdevices> {
                 // crossAxisSpacing: 20,
                 crossAxisCount: 2,
               ),
-              itemCount: device.length,
+              itemCount: Mylicense.length,
               itemBuilder: (context, index) {
-                switch (device[index].State) {
+                switch (Mylicense[index].State) {
                   case 'Valid':
                     backgroundColor = Colors.green.shade300;
                     break;
@@ -93,23 +92,12 @@ class _SelectdevicesState extends State<Selectdevices> {
                     backgroundColor = Colors.red.shade300;
                     break;
                 }
-                return MyDevice(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => Infromationdevice(
-                              name: device[index].name,
-                              id: device[index].id,
-                              state: device[index].State ?? "null",
-                            ),
-                      ),
-                    );
-                  },
-                  name: device[index].name,
-                  id: device[index].id,
+                return MyLicenseClass(
                   color: backgroundColor ?? Colors.black38,
+                  startDate: Mylicense[index].StartDate,
+                  finStart: Mylicense[index].FinDate,
+                  name: Mylicense[index].name,
+                  onTap: () {},
                 );
               },
             ),
