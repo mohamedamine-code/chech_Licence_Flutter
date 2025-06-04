@@ -14,6 +14,7 @@ class Selectdevices extends StatefulWidget {
 
 class _SelectdevicesState extends State<Selectdevices> {
   TextEditingController _searchController = TextEditingController();
+  Color? backgroundColor;
 
   final List<String> _allItems = [
     'Apple',
@@ -81,6 +82,17 @@ class _SelectdevicesState extends State<Selectdevices> {
               ),
               itemCount: device.length,
               itemBuilder: (context, index) {
+                switch (device[index].State) {
+                  case 'Valid':
+                    backgroundColor = Colors.green.shade300;
+                    break;
+                  case 'Missing':
+                    backgroundColor = Colors.orange.shade300;
+                    break;
+                  case 'expired':
+                    backgroundColor = Colors.red.shade300;
+                    break;
+                }
                 return MyDevice(
                   onTap: () {
                     Navigator.push(
@@ -90,13 +102,14 @@ class _SelectdevicesState extends State<Selectdevices> {
                             (context) => Infromationdevice(
                               name: device[index].name,
                               id: device[index].id,
-                              state: device[index].State?? "null",
+                              state: device[index].State ?? "null",
                             ),
                       ),
                     );
                   },
                   name: device[index].name,
                   id: device[index].id,
+                  color: backgroundColor ?? Colors.black38,
                 );
               },
             ),

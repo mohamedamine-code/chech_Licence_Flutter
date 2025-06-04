@@ -21,7 +21,7 @@ class Infromationdevice extends StatelessWidget {
               Column(
                 children: [
                   Icon(Icons.face),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 200),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

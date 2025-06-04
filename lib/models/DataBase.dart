@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class DatabaseDevices extends ChangeNotifier {
   // local data Base of our device
   List<Device> MyDevice = [
-    Device(State: "valid", name: "imprimante 1", id: "855858888888"),
-    Device(State: "valid", name: "imprimante 2", id: "88885588888"),
+    Device(State: "Valid", name: "imprimante 1", id: "855858888888"),
+    Device(State: "Valid", name: "imprimante 2", id: "88885588888"),
     Device(State: "Missing", name: "imprimante 3", id: "8855688888"),
     Device(State: "expired", name: "imprimante 4", id: "888556888"),
     Device(State: "Missing", name: "imprimante 5", id: "8888855888"),

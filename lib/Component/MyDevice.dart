@@ -4,7 +4,8 @@ class MyDevice extends StatelessWidget {
   String name;
   String id;
   VoidCallback onTap;
-  MyDevice({required this.id,required this.name, required this.onTap});
+  Color color;
+  MyDevice({required this.color, required this.id,required this.name, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +14,11 @@ class MyDevice extends StatelessWidget {
         onTap();
       },
       child: Container(
+        
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.black38,
+          color: color,
           borderRadius: BorderRadius.circular(12)
         ),
         child: Column(
