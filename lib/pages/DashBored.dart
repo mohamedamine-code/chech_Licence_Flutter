@@ -30,6 +30,13 @@ class Dashboard extends StatelessWidget {
               children: [
                 MyContainer(
                   
+                  data: "Valid: 1",
+                  icon: Icons.connected_tv,
+                  color: Colors.green,
+                ),
+                const SizedBox(height: 16),
+                MyContainer(
+                  
                   data: "Expiring Soon: 2",
                   icon: Icons.warning_amber_rounded,
                   color: Colors.orange,

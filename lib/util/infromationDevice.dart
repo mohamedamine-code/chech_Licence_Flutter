@@ -5,10 +5,27 @@ class Infromationdevice extends StatelessWidget {
   String name;
   String id;
   String state;
-  Infromationdevice({required this.id,required this.name ,required this.state});
+  Infromationdevice({
+    required this.id,
+    required this.name,
+    required this.state,
+  });
 
   @override
   Widget build(BuildContext context) {
+    Color? color;
+
+    switch (state) {
+      case 'Valid':
+        color = Colors.green.shade300;
+        break;
+      case 'Missing':
+        color = Colors.orange.shade300;
+        break;
+      case 'expired':
+        color = Colors.red.shade300;
+        break;
+    }
     return Scaffold(
       appBar: AppBar(title: Text("Device Information")),
       body: Center(
@@ -17,7 +34,6 @@ class Infromationdevice extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              
               Column(
                 children: [
                   Icon(Icons.face),
@@ -27,11 +43,17 @@ class Infromationdevice extends StatelessWidget {
                     children: [
                       Text(
                         "name:",
-                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         name,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
@@ -41,11 +63,17 @@ class Infromationdevice extends StatelessWidget {
                     children: [
                       Text(
                         "id:",
-                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         id,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
@@ -55,11 +83,18 @@ class Infromationdevice extends StatelessWidget {
                     children: [
                       Text(
                         "state:",
-                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         state,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: color,
+                        ),
                       ),
                     ],
                   ),
@@ -69,22 +104,29 @@ class Infromationdevice extends StatelessWidget {
                     children: [
                       Text(
                         "describtion:",
-                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         "dddd",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
                 ],
               ),
               GestureDetector(
-                onTap: (){},
+                onTap: () {},
                 child: MyContainer(
                   icon: Icons.warning_amber_rounded,
-                  data: "REPPORT"),
-              )
+                  data: "REPPORT",
+                ),
+              ),
             ],
           ),
         ),
