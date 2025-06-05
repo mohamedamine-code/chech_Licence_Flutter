@@ -100,14 +100,20 @@ class _SelectLicenseState extends State<SelectLicense> {
               itemCount: _filteredItems.length,
               itemBuilder: (context, index) {
                 switch (Mylicense[index].State) {
-                  case 'Valid':
+                  case 'License is valid for more than 1 month':
                     backgroundColor = Colors.green.shade300;
                     break;
-                  case 'Missing':
+                  case 'Less than 1 month remaining':// 30 -14
                     backgroundColor = Colors.orange.shade300;
                     break;
-                  case 'expired':
+                  case 'Less than 2 weeks remaining'://14-7
                     backgroundColor = Colors.red.shade300;
+                    break;
+                    case 'Less than 1 week remaining'://7-0
+                    backgroundColor = Colors.red.shade500;
+                    break;
+                  case 'License is not currently valid':// expired
+                    backgroundColor = Colors.black38;
                     break;
                 }
                 var license = _filteredItems[index];

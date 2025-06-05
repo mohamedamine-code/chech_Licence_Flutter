@@ -26,9 +26,11 @@ class MyLicenseClass extends StatelessWidget {
         onTap();
       },
       child: Container(
+        
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
         decoration: BoxDecoration(
+          // color: Colors.redAccent,
           color: color,
           borderRadius: BorderRadius.circular(12),
         ),
@@ -39,7 +41,6 @@ class MyLicenseClass extends StatelessWidget {
               height: 150,
               width: double.infinity,
               child: Image.asset(path,fit: BoxFit.contain,)),
-
             Column(
               children: [
                 Row(
@@ -62,7 +63,6 @@ class MyLicenseClass extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 30),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

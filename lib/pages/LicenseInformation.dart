@@ -25,20 +25,27 @@ class LicenseInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color? color;
+    Color? backgroundColor;
     String formattedStart = DateFormat('MM/dd/yyyy').format(StartDate);
     String formattedEnd = DateFormat('MM/dd/yyyy').format(FinDate);
     switch (state) {
-      case 'Valid':
-        color = Colors.green.shade300;
-        break;
-      case 'Missing':
-        color = Colors.orange.shade300;
-        break;
-      case 'expired':
-        color = Colors.red.shade300;
-        break;
-    }
+      case 'License is valid for more than 1 month':
+                    backgroundColor = Colors.green;
+                    break;
+                  case 'Less than 1 month remaining':// 30 -14
+                    backgroundColor = Colors.orange;
+                    break;
+                  case 'Less than 2 weeks remaining'://14-7
+                    backgroundColor = Colors.red;
+                    break;
+                    case 'Less than 1 week remaining'://7-0
+                    backgroundColor = Colors.red;
+                    break;
+                  case 'License is not currently valid':// expired
+                    backgroundColor = Colors.black38;
+                    break;
+                }
+    
     return Scaffold(
       appBar: AppBar(title: Text("License Information")),
       body: SingleChildScrollView(
@@ -107,7 +114,7 @@ class LicenseInformation extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: color,
+                            // color: color,
                           ),
                         ),
                       ],
@@ -127,6 +134,7 @@ class LicenseInformation extends StatelessWidget {
                         Text(
                           state,
                           style: TextStyle(
+                            color: backgroundColor,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),

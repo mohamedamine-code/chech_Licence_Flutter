@@ -29,10 +29,10 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           MyListTile(
-            data: "Upcomming Expiries License",
+            data: "Add License",
             icon: Icons.explore,
             onTap: () {
-              Navigator.pushNamed(context, '/UpCommingExpiries');
+              Navigator.pushNamed(context, '/addlicense');
             },
           ),
           MyListTile(

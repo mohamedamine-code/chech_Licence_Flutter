@@ -2,7 +2,7 @@ import 'package:check_license/models/DataBaseDevice.dart';
 import 'package:check_license/models/DataBsaeLicense.dart';
 import 'package:check_license/pages/DashBored.dart';
 import 'package:check_license/pages/SelectLicense.dart';
-import 'package:check_license/pages/UpcommingExpiries.dart';
+import 'package:check_license/pages/AddLicense.dart';
 import 'package:check_license/pages/ViewLicense.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/':(context)=> Dashboard(),
         '/SelectDevice':(context)=>SelectLicense(),
-        '/UpCommingExpiries':(context)=> Upcommingexpiries(),
+        '/addlicense':(context)=> Addlicense(),
         '/ViewLicense':(context)=> Viewlicense(),
       },
     );
