@@ -33,11 +33,11 @@ void checkDate(License x) {
 
   // List of License 
   List <License> MyLicense=[
-    License(State: '',name: "adobe", StartDate: DateTime(2025,6,4), FinDate: DateTime(2025,11,4)),
-    License(State: '',name: "microsoft-365", StartDate: DateTime(2025,6,4), FinDate: DateTime(2025,11,4)),
-    License(State: '',name: "Mceaa", StartDate: DateTime(2025,6,4), FinDate: DateTime(2025,11,4)),
-    License(State: '',name: "Net", StartDate: DateTime(2025,6,4), FinDate: DateTime(2025,11,4)),
-    License(State: '',name: "VPN", StartDate: DateTime(2025,6,4), FinDate: DateTime(2025,11,4)),
+    License(State: '',name: "adobe", StartDate: DateTime(2025,6,4), FinDate: DateTime(2025,11,4),path: 'assets/img/Adobe-Photoshop-Logo.png'),
+    License(State: '',name: "microsoft-365", StartDate: DateTime(2025,6,4), FinDate: DateTime(2025,11,4),path: 'assets/img/express-logo.png'),
+    License(State: '',name: "Mceaa", StartDate: DateTime(2025,6,4), FinDate: DateTime(2025,11,4),path: 'assets/img/Kaspersky-Logo-1997-500x315.png'),
+    License(State: '',name: "Net", StartDate: DateTime(2025,6,4), FinDate: DateTime(2025,11,4),path: 'assets/img/Office-365-Logo-2020.png'),
+    License(State: '',name: "VPN", StartDate: DateTime(2025,6,4), FinDate: DateTime(2025,11,4),path: 'assets/img/R.png'),
   ];
   // get the List
   List<License> get getLicense => MyLicense;

@@ -7,7 +7,9 @@ class MyLicenseClass extends StatelessWidget {
   DateTime finStart;
   VoidCallback onTap;
   Color color;
+  String path;
   MyLicenseClass({
+    required this.path,
     required this.color,
     required this.startDate,
     required this.finStart,
@@ -24,7 +26,7 @@ class MyLicenseClass extends StatelessWidget {
         onTap();
       },
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(20),
         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
         decoration: BoxDecoration(
           color: color,
@@ -33,7 +35,10 @@ class MyLicenseClass extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(Icons.face),
+            SizedBox(
+              height: 150,
+              width: double.infinity,
+              child: Image.asset(path,fit: BoxFit.contain,)),
 
             Column(
               children: [

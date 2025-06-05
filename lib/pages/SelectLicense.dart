@@ -1,5 +1,5 @@
 import 'package:check_license/Component/Drawer.dart';
-import 'package:check_license/Component/License.dart';
+import 'package:check_license/Component/MyLicense.dart';
 import 'package:check_license/models/DataBsaeLicense.dart';
 import 'package:check_license/models/license.dart';
 import 'package:check_license/pages/LicenseInformation.dart';
@@ -112,6 +112,7 @@ class _SelectLicenseState extends State<SelectLicense> {
                 }
                 var license = _filteredItems[index];
                 return MyLicenseClass(
+                  path: license.path,
                   color: backgroundColor ?? Colors.black38,
                   startDate: license.StartDate,
                   finStart: license.FinDate,
@@ -122,6 +123,7 @@ class _SelectLicenseState extends State<SelectLicense> {
                       MaterialPageRoute(
                         builder:
                             (context) => LicenseInformation(
+                              path: Mylicense[index].path,
                               index: index,
                               state: Mylicense[index].State,
                               FinDate: Mylicense[index].FinDate,
@@ -135,7 +137,9 @@ class _SelectLicenseState extends State<SelectLicense> {
               },
             ),
           ),
+          
         ],
+        
       ),
     );
   }
