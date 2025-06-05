@@ -1,6 +1,10 @@
 import 'package:check_license/Component/Container.dart';
+import 'package:check_license/models/DataBsaeLicense.dart';
+import 'package:check_license/models/license.dart';
+import 'package:check_license/util/printPdf.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 
 class LicenseInformation extends StatelessWidget {
@@ -8,7 +12,9 @@ class LicenseInformation extends StatelessWidget {
   DateTime StartDate;
   DateTime FinDate;
   String state;
+  int index;
   LicenseInformation({
+    required this.index,
     required this.state,
     required this.FinDate,
     required this.name,
@@ -127,7 +133,10 @@ class LicenseInformation extends StatelessWidget {
                 ],
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  List<License> license=Provider.of<Databsaelicense>(context, listen: false).MyLicense;
+                  generatePdfReportSingleLicense(license[index]);
+                },
                 child: MyContainer(
                   icon: Icons.warning_amber_rounded,
                   data: "REPPORT",

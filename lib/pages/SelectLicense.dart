@@ -2,7 +2,8 @@ import 'package:check_license/Component/Drawer.dart';
 import 'package:check_license/Component/License.dart';
 import 'package:check_license/models/DataBsaeLicense.dart';
 import 'package:check_license/models/license.dart';
-import 'package:check_license/util/LicenseInformation.dart';
+import 'package:check_license/pages/LicenseInformation.dart';
+import 'package:check_license/util/printPdf.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,34 +20,35 @@ class _SelectLicenseState extends State<SelectLicense> {
 
   Color? backgroundColor;
 
-
   List<License> _filteredItems = [];
-  
+
+
 
   @override
   void initState() {
-
     super.initState();
-    _filteredItems = Provider.of<Databsaelicense>(context,listen: false).MyLicense;
+    _filteredItems =
+        Provider.of<Databsaelicense>(context, listen: false).MyLicense;
     // tiggres the function filterSearch(); when the content of _searchController
     // change .
     _searchController.addListener(() {
       filterSearch();
     });
     Provider.of<Databsaelicense>(context, listen: false).updateAllStates();
-
   }
 
-void filterSearch() {
-  final query = _searchController.text.toLowerCase();
-  final allItems = Provider.of<Databsaelicense>(context, listen: false).MyLicense;
+  void filterSearch() {
+    final query = _searchController.text.toLowerCase();
+    final allItems =
+        Provider.of<Databsaelicense>(context, listen: false).MyLicense;
 
-  setState(() {
-    _filteredItems = allItems.where((item) {
-      return item.name.toLowerCase().contains(query); // ✅ Correct use
-    }).toList();
-  });
-}
+    setState(() {
+      _filteredItems =
+          allItems.where((item) {
+            return item.name.toLowerCase().contains(query); // ✅ Correct use
+          }).toList();
+    });
+  }
 
   @override
   void dispose() {
@@ -58,7 +60,22 @@ void filterSearch() {
   Widget build(BuildContext context) {
     final Mylicense = context.watch<Databsaelicense>().getLicense;
     return Scaffold(
-      appBar: AppBar(title: Text("Select License"), centerTitle: true),
+      floatingActionButton: AnimatedOpacity(
+        opacity: 0.5,
+        duration: Duration(microseconds: 1),
+        child: FloatingActionButton(
+          elevation: 0,
+          onPressed: () {
+          generatePdfReportAllLicense(Mylicense);
+          },
+          child: Center(child: Icon(Icons.warning_rounded)),
+        ),
+      ),
+      appBar: AppBar(
+        elevation: 0,
+        title: Text("Select License"),
+        centerTitle: true,
+      ),
       drawer: MyDrawer(),
       body: Column(
         children: [
@@ -105,6 +122,7 @@ void filterSearch() {
                       MaterialPageRoute(
                         builder:
                             (context) => LicenseInformation(
+                              index: index,
                               state: Mylicense[index].State,
                               FinDate: Mylicense[index].FinDate,
                               name: Mylicense[index].name,
