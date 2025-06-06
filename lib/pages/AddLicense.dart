@@ -20,38 +20,41 @@ class _AddlicenseState extends State<Addlicense> {
   DateTime? _expiryDate;
   DateTime? startDate;
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate() &&
-        startDate != null &&
-        _expiryDate != null &&
-        _selectedImage != null) {
-      _formKey.currentState!.save();
+void _submitForm() {
+  if (_formKey.currentState!.validate() &&
+      startDate != null &&
+      _expiryDate != null &&
+      _selectedImage != null) {
 
-      final imagePath = _selectedImage!.path;
-      Provider.of<Databsaelicense>(
-        context,
-        listen: false,
-      ).addItem('', imagePath, nameControllor.text, startDate!, _expiryDate!);
+    _formKey.currentState!.save();
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('License submitted successfully')),
-      );
+    final imagePath = _selectedImage!.path;
+    Provider.of<Databsaelicense>(
+      context,
+      listen: false,
+    ).addItem('', imagePath, nameControllor.text, startDate!, _expiryDate!);
 
-      // Clear all fields
-      nameControllor.clear();
-      startDate = null;
-      _expiryDate = null;
-      _selectedImage = null;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('License submitted successfully')),
+    );
 
-      setState(() {
-        // This will update the UI (e.g., hide form if needed)
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please complete all fields')),
-      );
-    }
+    // Clear all fields
+    nameControllor.clear();
+    startDate = null;
+    _expiryDate = null;
+    _selectedImage = null;
+
+    setState(() {
+      // This will update the UI (e.g., hide form if needed)
+    });
+
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Please complete all fields')),
+    );
   }
+}
+
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
