@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -19,6 +21,8 @@ class MyLicenseClass extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     String formattedStart = DateFormat('MM/dd/yyyy').format(startDate);
     String formattedEnd = DateFormat('MM/dd/yyyy').format(finStart);
     return GestureDetector(
@@ -26,7 +30,6 @@ class MyLicenseClass extends StatelessWidget {
         onTap();
       },
       child: Container(
-        
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
         decoration: BoxDecoration(
@@ -37,10 +40,20 @@ class MyLicenseClass extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              height: 150,
-              width: double.infinity,
-              child: Image.asset(path,fit: BoxFit.contain,)),
+            path.isEmpty
+          ? SizedBox(
+            height: 150,
+            width: double.infinity,
+            child: Image.asset('assets/Rimg/none-icon-23.jpg', fit: BoxFit.contain))
+          : path.startsWith('/data') || path.startsWith('/storage')
+          ? SizedBox(
+            height: 150,
+            width: double.infinity,
+            child: Image.file(File(path), fit: BoxFit.contain))
+          : SizedBox(
+            height: 150,
+            width: double.infinity,
+            child: Image.asset(path, fit: BoxFit.contain)),// assuming it's from assets
             Column(
               children: [
                 Row(

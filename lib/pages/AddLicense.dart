@@ -2,6 +2,8 @@ import 'package:check_license/Component/Drawer.dart';
 import 'package:check_license/models/DataBsaeLicense.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class Addlicense extends StatefulWidget {
   const Addlicense({super.key});
@@ -11,54 +13,69 @@ class Addlicense extends StatefulWidget {
 }
 
 class _AddlicenseState extends State<Addlicense> {
+  File? _selectedImage;
   final _formKey = GlobalKey<FormState>();
-  TextEditingController nameControllor= TextEditingController();
+  TextEditingController nameControllor = TextEditingController();
   String _softwareName = '';
   DateTime? _expiryDate;
   DateTime? startDate;
-  
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       // Submit logic here
-      Provider.of<Databsaelicense>(context,listen: false)..addItem('', 'assets/img/Zoom-Logo-PNG-Clipart.png', nameControllor.text, startDate!, _expiryDate!);
+      final imagePath = _selectedImage?.path ?? ''; // fallback to empty string
+      Provider.of<Databsaelicense>(
+        context,
+        listen: false,
+      ).addItem('', imagePath, nameControllor.text, startDate!, _expiryDate!);
+
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('License submitted successfully')));
     }
+    nameControllor.clear();
+  }
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _selectedImage = File(pickedFile.path);
+      });
+    }
   }
 
   Future<void> _selectDateFin(BuildContext context) async {
-  final picked = await showDatePicker(
-    context: context,
-    initialDate: _expiryDate ?? DateTime.now(),
-    firstDate: DateTime.now(),
-    lastDate: DateTime(2100),
-  );
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: _expiryDate ?? DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    );
 
-  if (picked != null && picked != _expiryDate) {
-    setState(() {
-      _expiryDate = picked;
-    });
+    if (picked != null && picked != _expiryDate) {
+      setState(() {
+        _expiryDate = picked;
+      });
+    }
   }
-}
 
-Future<void> _selectDateStart(BuildContext context) async {
-  final picked = await showDatePicker(
-    context: context,
-    initialDate: startDate ?? DateTime.now(),
-    firstDate: DateTime(2000),
-    lastDate: DateTime(2100),
-  );
+  Future<void> _selectDateStart(BuildContext context) async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: startDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
 
-  if (picked != null && picked != startDate) {
-    setState(() {
-      startDate = picked;
-    });
+    if (picked != null && picked != startDate) {
+      setState(() {
+        startDate = picked;
+      });
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +95,7 @@ Future<void> _selectDateStart(BuildContext context) async {
                 ),
                 controller: nameControllor,
               ),
-              
+
               SizedBox(height: 16),
 
               /// Responsible Person Email
@@ -118,6 +135,44 @@ Future<void> _selectDateStart(BuildContext context) async {
                       color: _expiryDate == null ? Colors.grey : Colors.black,
                     ),
                   ),
+                ),
+              ),
+              SizedBox(height: 16),
+
+              // pick image
+              Text(
+                'License Logo',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8),
+              GestureDetector(
+                onTap: _pickImage,
+                child: Container(
+                  height: 150,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child:
+                      _selectedImage != null
+                          ? Image.file(_selectedImage!, fit: BoxFit.cover)
+                          : Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.add_a_photo,
+                                  size: 40,
+                                  color: Colors.grey,
+                                ),
+                                Text(
+                                  'Tap to add image',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                          ),
                 ),
               ),
               SizedBox(height: 16),
