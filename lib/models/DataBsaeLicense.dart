@@ -26,9 +26,6 @@ class Databsaelicense extends ChangeNotifier {
   expiredList.remove(x);
 
   if (x.StartDate.isAfter(today)) {
-    // License not yet started
-    StateLicense = 'License is not yet active';
-    expiredList.add(x);
   } else if (x.FinDate.isBefore(today)) {
     // License expired
     StateLicense = 'License has expired';

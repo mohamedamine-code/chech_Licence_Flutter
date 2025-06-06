@@ -112,7 +112,7 @@ class _SelectLicenseState extends State<SelectLicense> {
                     case 'Less than 1 week remaining'://7-0
                     backgroundColor = Colors.red.shade500;
                     break;
-                  case 'License is not currently valid':// expired
+                  case 'License has expired':// expired
                     backgroundColor = Colors.black38;
                     break;
                 }
