@@ -99,7 +99,9 @@ void _submitForm() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add New License')),
+      drawer: MyDrawer(),
+      appBar: AppBar(
+        title: Text('Add New License')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

@@ -4,28 +4,55 @@ import 'package:flutter/material.dart';
 class Databsaelicense extends ChangeNotifier {
   // DateTime(year,month,day)
   String StateLicense = '';
+  // list valid license
+  List<License> validList = [];
+  // list expiring soon license
+  List<License> expirngSoonList = [];
+
+  // list Expired license
+  List<License> expiredList = [];
+
+
+  
 
   // Check the availability of the license by date
   void checkDate(License x) {
-    DateTime today = DateTime.now();
-    if (x.StartDate.isBefore(today) &&
-        (today.isBefore(x.FinDate) || today.isAtSameMomentAs(x.FinDate))) {
-      Duration diff = x.FinDate.difference(today);
+  DateTime today = DateTime.now();
+  Duration diff = x.FinDate.difference(today);
 
-      if (diff.inDays < 7) {
-        StateLicense = 'Less than 1 week remaining';
-      } else if (diff.inDays < 14) {
-        StateLicense = 'Less than 2 weeks remaining';
-      } else if (diff.inDays < 30) {
-        StateLicense = 'Less than 1 month remaining';
-      } else {
-        StateLicense = 'License is valid for more than 1 month';
-      }
+  // Clear previous state to avoid duplicates on re-check
+  validList.remove(x);
+  expirngSoonList.remove(x);
+  expiredList.remove(x);
+
+  if (x.StartDate.isAfter(today)) {
+    // License not yet started
+    StateLicense = 'License is not yet active';
+    expiredList.add(x);
+  } else if (x.FinDate.isBefore(today)) {
+    // License expired
+    StateLicense = 'License has expired';
+    expiredList.add(x);
+  } else {
+    // License is active
+    if (diff.inDays < 7) {
+      StateLicense = 'Less than 1 week remaining';
+      expirngSoonList.add(x);
+    } else if (diff.inDays < 14) {
+      StateLicense = 'Less than 2 weeks remaining';
+      expirngSoonList.add(x);
+    } else if (diff.inDays < 30) {
+      StateLicense = 'Less than 1 month remaining';
+      expirngSoonList.add(x);
     } else {
-      StateLicense = 'License is not currently valid';
+      StateLicense = 'License is valid for more than 1 month';
+      validList.add(x);
     }
-    x.State = StateLicense;
   }
+
+  x.State = StateLicense;
+}
+
 
   // List of License
   List<License> MyLicense = [
@@ -65,12 +92,25 @@ class Databsaelicense extends ChangeNotifier {
       path: 'assets/img/R.png',
     ),
   ];
+
   // get the List
   List<License> get getLicense => MyLicense;
 
   // add element to list
-  void addItem(String state,String path,String name, DateTime startDate, DateTime FinDate) {
-    License x =License(State: state, path: path, name: name, StartDate: startDate, FinDate: FinDate);
+  void addItem(
+    String state,
+    String path,
+    String name,
+    DateTime startDate,
+    DateTime FinDate,
+  ) {
+    License x = License(
+      State: state,
+      path: path,
+      name: name,
+      StartDate: startDate,
+      FinDate: FinDate,
+    );
     MyLicense.add(x);
     checkDate(x);
     notifyListeners();
@@ -88,4 +128,12 @@ class Databsaelicense extends ChangeNotifier {
       checkDate(license);
     }
   }
+
+  // function to che
+
+  // function to calucle lenthg list of valid license
+
+  // function to calucle lenthg list of Expiring soon license
+
+  // function to calucle lenthg list of expired license
 }
