@@ -1,7 +1,10 @@
 import 'dart:io';
 
+import 'package:check_license/models/DataBsaeLicense.dart';
+import 'package:check_license/models/license.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class MyLicenseClass extends StatelessWidget {
   String name;
@@ -10,7 +13,9 @@ class MyLicenseClass extends StatelessWidget {
   VoidCallback onTap;
   Color color;
   String path;
+  License item;
   MyLicenseClass({
+    required this.item,
     required this.path,
     required this.color,
     required this.startDate,
@@ -25,7 +30,28 @@ class MyLicenseClass extends StatelessWidget {
 
     String formattedStart = DateFormat('MM/dd/yyyy').format(startDate);
     String formattedEnd = DateFormat('MM/dd/yyyy').format(finStart);
+
+      void delateIteam(){
+      showDialog(context: context, builder: (_){
+        return AlertDialog(
+          title: Text("Delate license"),
+          content: Text("you are sure to delate this license ?"),
+          actions: [
+            IconButton(onPressed: (){
+              Navigator.pop(context);
+            }, icon: Text("cancel")),
+            IconButton(onPressed: (){
+              context.read<Databsaelicense>().removeItme(item);
+              Navigator.pop(context);
+            }, icon: Text("yes")),
+          ],
+        );
+      });
+    }
     return GestureDetector(
+      onLongPress: () {
+        delateIteam();
+      },
       onTap: () {
         onTap();
       },

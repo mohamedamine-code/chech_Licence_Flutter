@@ -118,6 +118,7 @@ class _SelectLicenseState extends State<SelectLicense> {
                 }
                 var license = _filteredItems[index];
                 return MyLicenseClass(
+                  item: license,
                   path: license.path,
                   color: backgroundColor ?? Colors.black38,
                   startDate: license.StartDate,
