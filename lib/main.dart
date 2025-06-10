@@ -3,12 +3,12 @@ import 'package:check_license/models/DataBsaeLicense.dart';
 import 'package:check_license/pages/DashBored.dart';
 import 'package:check_license/pages/SelectLicense.dart';
 import 'package:check_license/pages/AddLicense.dart';
-import 'package:check_license/pages/ViewLicense.dart';
+import 'package:check_license/pages/ViewArchiv.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_file.dart';
+
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => Dashboard(),
         '/SelectDevice': (context) => SelectLicense(),
         '/addlicense': (context) => Addlicense(),
-        '/ViewLicense': (context) => Viewlicense(),
+        '/ViewArchiv':(context)=>ViewArchiv(),
+
       },
     );
   }

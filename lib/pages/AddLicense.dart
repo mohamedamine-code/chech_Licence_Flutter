@@ -167,7 +167,7 @@ void _submitForm() {
                       onTap: () => _selectDateFin(context),
                       child: InputDecorator(
                         decoration: InputDecoration(
-                          labelText: 'Expiry Date',
+                          hintText: 'Expiry Date',
                           border: OutlineInputBorder(),
                         ),
                         child: Text(

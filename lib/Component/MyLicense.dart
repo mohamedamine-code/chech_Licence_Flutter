@@ -13,9 +13,9 @@ class MyLicenseClass extends StatelessWidget {
   VoidCallback onTap;
   Color color;
   String path;
-  License item;
+  License? item;
   MyLicenseClass({
-    required this.item,
+    this.item,
     required this.path,
     required this.color,
     required this.startDate,
@@ -41,7 +41,7 @@ class MyLicenseClass extends StatelessWidget {
               Navigator.pop(context);
             }, icon: Text("cancel")),
             IconButton(onPressed: (){
-              context.read<Databsaelicense>().removeItme(item);
+              context.read<Databsaelicense>().removeItme(item!);
               Navigator.pop(context);
             }, icon: Text("yes")),
           ],

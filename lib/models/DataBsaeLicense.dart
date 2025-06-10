@@ -16,6 +16,9 @@ class Databsaelicense extends ChangeNotifier {
   // list Expired license
   List<License> expiredList = [];
 
+  // archivte list
+  List<License> archiveList = [];
+
 
   
 
@@ -125,6 +128,11 @@ class Databsaelicense extends ChangeNotifier {
   // remove element from List
   void removeItme(License x) {
     MyLicense.remove(x);
+    expiredList.remove(x);
+    validList.remove(x);
+    expirngSoonList.remove(x);
+    expiredList.remove(x);
+    archiveList.add(x);
     notifyListeners();
   }
 
