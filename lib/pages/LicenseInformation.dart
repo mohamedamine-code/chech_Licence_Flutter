@@ -27,8 +27,8 @@ class LicenseInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color? backgroundColor;
-    String formattedStart = DateFormat('MM/dd/yyyy').format(StartDate);
-    String formattedEnd = DateFormat('MM/dd/yyyy').format(FinDate);
+    String formattedStart = DateFormat('MMMM d, y').format(StartDate);
+    String formattedEnd = DateFormat('MMMM d, y').format(FinDate);
     switch (state) {
       case 'License is valid for more than 1 month':
         backgroundColor = Colors.green;

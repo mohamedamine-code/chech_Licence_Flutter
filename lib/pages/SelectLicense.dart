@@ -22,8 +22,6 @@ class _SelectLicenseState extends State<SelectLicense> {
 
   List<License> _filteredItems = [];
 
-
-
   @override
   void initState() {
     super.initState();
@@ -80,7 +78,7 @@ class _SelectLicenseState extends State<SelectLicense> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
@@ -101,19 +99,19 @@ class _SelectLicenseState extends State<SelectLicense> {
               itemBuilder: (context, index) {
                 switch (Mylicense[index].State) {
                   case 'License is valid for more than 1 month':
-                    backgroundColor = Colors.green.shade300;
+                    backgroundColor = Colors.green.withValues(alpha: 0.1);
                     break;
                   case 'Less than 1 month remaining':// 30 -14
-                    backgroundColor = Colors.orange.shade300;
+                    backgroundColor = Colors.orange.withValues(alpha: 0.1);
                     break;
                   case 'Less than 2 weeks remaining'://14-7
-                    backgroundColor = Colors.red.shade300;
+                    backgroundColor = Colors.orange.withValues(alpha: 0.1);
                     break;
                     case 'Less than 1 week remaining'://7-0
-                    backgroundColor = Colors.red.shade500;
+                    backgroundColor = Colors.orange.withValues(alpha: 0.1);
                     break;
                   case 'License has expired':// expired
-                    backgroundColor = Colors.black38;
+                    backgroundColor = Colors.red.withValues(alpha: 0.1);
                     break;
                 }
                 var license = _filteredItems[index];

@@ -2,10 +2,14 @@ import 'package:check_license/models/license.dart';
 import 'package:flutter/material.dart';
 
 class Databsaelicense extends ChangeNotifier {
+
+
   // DateTime(year,month,day)
   String StateLicense = '';
+
   // list valid license
   List<License> validList = [];
+
   // list expiring soon license
   List<License> expirngSoonList = [];
 
@@ -26,6 +30,7 @@ class Databsaelicense extends ChangeNotifier {
   expiredList.remove(x);
 
   if (x.StartDate.isAfter(today)) {
+    
   } else if (x.FinDate.isBefore(today)) {
     // License expired
     StateLicense = 'License has expired';
@@ -60,6 +65,7 @@ class Databsaelicense extends ChangeNotifier {
       FinDate: DateTime(2025, 6, 4),
       path: 'assets/img/Adobe-Photoshop-Logo.png',
     ),
+
     License(
       State: '',
       name: "microsoft-365",
@@ -67,13 +73,15 @@ class Databsaelicense extends ChangeNotifier {
       FinDate: DateTime(2025, 7, 4),
       path: 'assets/img/express-logo.png',
     ),
+
     License(
       State: '',
-      name: "Mceaa",
+      name: "Mcea",
       StartDate: DateTime(2025, 5, 20),
       FinDate: DateTime(2025, 6, 4),
       path: 'assets/img/Kaspersky-Logo-1997-500x315.png',
     ),
+
     License(
       State: '',
       name: "Net",
@@ -81,6 +89,7 @@ class Databsaelicense extends ChangeNotifier {
       FinDate: DateTime(2025, 11, 4),
       path: 'assets/img/Office-365-Logo-2020.png',
     ),
+
     License(
       State: '',
       name: "VPN",
@@ -126,11 +135,5 @@ class Databsaelicense extends ChangeNotifier {
     }
   }
 
-  // function to che
 
-  // function to calucle lenthg list of valid license
-
-  // function to calucle lenthg list of Expiring soon license
-
-  // function to calucle lenthg list of expired license
 }

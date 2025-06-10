@@ -123,7 +123,7 @@ void _submitForm() {
                     SizedBox(height: 10),
                     TextField(
                       decoration: InputDecoration(
-                        labelText: 'Software Name',
+                        hintText: 'Software Name',
                         border: OutlineInputBorder(),
                       ),
                       controller: nameControllor,
@@ -135,12 +135,14 @@ void _submitForm() {
                       'Start Date',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
+
                     SizedBox(height: 10),
+
                     InkWell(
                       onTap: () => _selectDateStart(context),
                       child: InputDecorator(
                         decoration: InputDecoration(
-                          labelText: 'Start Date',
+                          hintText: 'Start Date',
                           border: OutlineInputBorder(),
                         ),
                         child: Text(
