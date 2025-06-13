@@ -38,12 +38,12 @@ class MyDrawer extends StatelessWidget {
               
                 MyListTile(
                   data: "View archive",
-                  icon: Icons.explore,
+                  icon: Icons.delete,
                   onTap: () => _navigateTo(context, '/ViewArchiv'),
                 ),
-                 MyListTile(
+                MyListTile(
                   data: "Add License",
-                  icon: Icons.explore,
+                  icon: Icons.library_add,
                   onTap: () => _navigateTo(context, '/addlicense'),
                 ),
               ],

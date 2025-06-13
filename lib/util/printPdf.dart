@@ -2,7 +2,7 @@ import 'package:check_license/models/license.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-
+// for all the license of list
 Future<void> generatePdfReportAllLicense(List<License> licenses) async {
   final pdf = pw.Document();
 
@@ -37,8 +37,6 @@ Future<void> generatePdfReportAllLicense(List<License> licenses) async {
 
 
 // for just one element of list 
-
-
 Future<void> generatePdfReportSingleLicense(License license) async {
   final pdf = pw.Document();
 
