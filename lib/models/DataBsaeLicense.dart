@@ -39,9 +39,7 @@ class Databsaelicense extends ChangeNotifier {
   } else {
     if (diff.inDays < 30) {
       expirngSoonList.add(x);
-
       bool alreadyNotified = prefs.getBool(notifiedKey) ?? false;
-
       if (!alreadyNotified) {
         LocalNotificationService.showSimpleNotification(
           'Check License',

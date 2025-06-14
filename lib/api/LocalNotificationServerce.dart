@@ -1,3 +1,4 @@
+import 'package:check_license/api/Send_Emil.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -12,7 +13,7 @@ class LocalNotificationService {
       ),
     );
   }
-    static void showSimpleNotification(String title, String body) {
+    static void showSimpleNotification(String title, String body)async {
     const details = NotificationDetails(
       android: AndroidNotificationDetails(
         'channel_id',
@@ -23,6 +24,7 @@ class LocalNotificationService {
     );
 
     _notificationsPlugin.show(0, title, body, details);
+    await Mail().sendMail();
   }
 
   static void showNotification(RemoteMessage message) {
