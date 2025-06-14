@@ -126,8 +126,10 @@ class Databsaelicense extends ChangeNotifier {
     String name,
     DateTime startDate,
     DateTime FinDate,) {
+      int count=1;
+      // count++;
     License x = License(
-      id: '1051', // you shoulf fixed 
+      id: count.toString(), // you shoulf fixed 
       State: state,
       path: path,
       name: name,
