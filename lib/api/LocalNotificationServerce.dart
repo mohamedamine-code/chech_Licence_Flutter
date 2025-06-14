@@ -2,21 +2,18 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNotificationService {
-  static final FlutterLocalNotificationsPlugin _notificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  static final _notificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static void initialize() {
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-      android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-      iOS: DarwinInitializationSettings(),
+    _notificationsPlugin.initialize(
+      const InitializationSettings(
+        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+        iOS: DarwinInitializationSettings(),
+      ),
     );
-
-    _notificationsPlugin.initialize(initializationSettings);
   }
-
-  static void showNotification(RemoteMessage message) {
-    const NotificationDetails notificationDetails = NotificationDetails(
+    static void showSimpleNotification(String title, String body) {
+    const details = NotificationDetails(
       android: AndroidNotificationDetails(
         'channel_id',
         'channel_name',
@@ -25,11 +22,22 @@ class LocalNotificationService {
       ),
     );
 
+    _notificationsPlugin.show(0, title, body, details);
+  }
+
+  static void showNotification(RemoteMessage message) {
     _notificationsPlugin.show(
       0,
       message.notification?.title,
       message.notification?.body,
-      notificationDetails,
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'channel_id',
+          'channel_name',
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      ),
     );
   }
 }

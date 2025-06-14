@@ -1,9 +1,8 @@
+import 'package:check_license/api/LocalNotificationServerce.dart';
 import 'package:check_license/models/license.dart';
 import 'package:flutter/material.dart';
 
 class Databsaelicense extends ChangeNotifier {
-
-
   // DateTime(year,month,day)
   String StateLicense = '';
 
@@ -19,45 +18,42 @@ class Databsaelicense extends ChangeNotifier {
   // archivte list
   List<License> archiveList = [];
 
-
-  
-
   // Check the availability of the license by date
   void checkDate(License x) {
-  DateTime today = DateTime.now();
-  Duration diff = x.FinDate.difference(today);
+    DateTime today = DateTime.now();
+    Duration diff = x.FinDate.difference(today);
 
-  // Clear previous state to avoid duplicates on re-check
-  validList.remove(x);
-  expirngSoonList.remove(x);
-  expiredList.remove(x);
+    // Clear previous state to avoid duplicates on re-check
+    validList.remove(x);
+    expirngSoonList.remove(x);
+    expiredList.remove(x);
 
-  if (x.StartDate.isAfter(today)) {
-    
-  } else if (x.FinDate.isBefore(today)) {
-    // License expired
-    StateLicense = 'License has expired';
-    expiredList.add(x);
-  } else {
-    // License is active
-    if (diff.inDays < 7) {
-      StateLicense = 'Less than 1 week remaining';
-      expirngSoonList.add(x);
-    } else if (diff.inDays < 14) {
-      StateLicense = 'Less than 2 weeks remaining';
-      expirngSoonList.add(x);
-    } else if (diff.inDays < 30) {
-      StateLicense = 'Less than 1 month remaining';
-      expirngSoonList.add(x);
+    if (x.FinDate.isBefore(today)) {
+      // License expired
+      StateLicense = 'License has expired';
+      expiredList.add(x);
     } else {
-      StateLicense = 'License is valid for more than 1 month';
-      validList.add(x);
+      // License is active
+      if (diff.inDays < 7) {
+        StateLicense = 'Less than 1 week remaining';
+        expirngSoonList.add(x);
+        LocalNotificationService.showSimpleNotification('ckeck Lisence','your Lisence it will be expired Soon !!');
+      } else if (diff.inDays < 14) {
+        StateLicense = 'Less than 2 weeks remaining';
+        expirngSoonList.add(x);
+        LocalNotificationService.showSimpleNotification('ckeck Lisence','your Lisence it will be expired Soon !!');
+      } else if (diff.inDays < 30) {
+        StateLicense = 'Less than 1 month remaining';
+        expirngSoonList.add(x);
+        LocalNotificationService.showSimpleNotification('ckeck Lisence','your Lisence it will be expired Soon !!');
+      } else {
+        StateLicense = 'License is valid for more than 1 month';
+        validList.add(x);
+      }
     }
+
+    x.State = StateLicense;
   }
-
-  x.State = StateLicense;
-}
-
 
   // List of License
   List<License> MyLicense = [
@@ -142,6 +138,4 @@ class Databsaelicense extends ChangeNotifier {
       checkDate(license);
     }
   }
-
-
 }
