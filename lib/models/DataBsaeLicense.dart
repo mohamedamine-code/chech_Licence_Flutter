@@ -1,8 +1,10 @@
 import 'package:check_license/api/LocalNotificationServerce.dart';
 import 'package:check_license/models/license.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Databsaelicense extends ChangeNotifier {
+  bool notified = false;
   // DateTime(year,month,day)
   String StateLicense = '';
 
@@ -19,45 +21,56 @@ class Databsaelicense extends ChangeNotifier {
   List<License> archiveList = [];
 
   // Check the availability of the license by date
-  void checkDate(License x) {
-    DateTime today = DateTime.now();
-    Duration diff = x.FinDate.difference(today);
+  void checkDate(License x) async {
+  final prefs = await SharedPreferences.getInstance();
+  final notifiedKey = 'notified_${x.id}'; // assuming x.id is unique
 
-    // Clear previous state to avoid duplicates on re-check
-    validList.remove(x);
-    expirngSoonList.remove(x);
-    expiredList.remove(x);
+  DateTime today = DateTime.now();
+  Duration diff = x.FinDate.difference(today);
 
-    if (x.FinDate.isBefore(today)) {
-      // License expired
-      StateLicense = 'License has expired';
-      expiredList.add(x);
-    } else {
-      // License is active
+  // Clear previous state
+  validList.remove(x);
+  expirngSoonList.remove(x);
+  expiredList.remove(x);
+
+  if (x.FinDate.isBefore(today)) {
+    StateLicense = 'License has expired';
+    expiredList.add(x);
+  } else {
+    if (diff.inDays < 30) {
+      expirngSoonList.add(x);
+
+      bool alreadyNotified = prefs.getBool(notifiedKey) ?? false;
+
+      if (!alreadyNotified) {
+        LocalNotificationService.showSimpleNotification(
+          'Check License',
+          'Your license will expire soon!',
+        );
+
+        await prefs.setBool(notifiedKey, true);
+      }
+
       if (diff.inDays < 7) {
         StateLicense = 'Less than 1 week remaining';
-        expirngSoonList.add(x);
-        LocalNotificationService.showSimpleNotification('ckeck Lisence','your Lisence it will be expired Soon !!');
       } else if (diff.inDays < 14) {
         StateLicense = 'Less than 2 weeks remaining';
-        expirngSoonList.add(x);
-        LocalNotificationService.showSimpleNotification('ckeck Lisence','your Lisence it will be expired Soon !!');
-      } else if (diff.inDays < 30) {
-        StateLicense = 'Less than 1 month remaining';
-        expirngSoonList.add(x);
-        LocalNotificationService.showSimpleNotification('ckeck Lisence','your Lisence it will be expired Soon !!');
       } else {
-        StateLicense = 'License is valid for more than 1 month';
-        validList.add(x);
+        StateLicense = 'Less than 1 month remaining';
       }
+    } else {
+      validList.add(x);
+      StateLicense = 'License is valid for more than 1 month';
     }
-
-    x.State = StateLicense;
   }
+
+  x.State = StateLicense;
+}
 
   // List of License
   List<License> MyLicense = [
     License(
+      id: '0',
       State: '',
       name: "adobe",
       StartDate: DateTime(2025, 6, 1),
@@ -66,6 +79,7 @@ class Databsaelicense extends ChangeNotifier {
     ),
 
     License(
+      id: '1',
       State: '',
       name: "microsoft-365",
       StartDate: DateTime(2025, 5, 4),
@@ -74,6 +88,7 @@ class Databsaelicense extends ChangeNotifier {
     ),
 
     License(
+      id: '2',
       State: '',
       name: "Mcea",
       StartDate: DateTime(2025, 5, 20),
@@ -82,6 +97,7 @@ class Databsaelicense extends ChangeNotifier {
     ),
 
     License(
+      id: '3',
       State: '',
       name: "Net",
       StartDate: DateTime(2025, 6, 4),
@@ -90,6 +106,7 @@ class Databsaelicense extends ChangeNotifier {
     ),
 
     License(
+      id: '4',
       State: '',
       name: "VPN",
       StartDate: DateTime(2025, 6, 4),
@@ -107,9 +124,9 @@ class Databsaelicense extends ChangeNotifier {
     String path,
     String name,
     DateTime startDate,
-    DateTime FinDate,
-  ) {
+    DateTime FinDate,) {
     License x = License(
+      id: '10', // you shoulf fixed 
       State: state,
       path: path,
       name: name,
