@@ -1,6 +1,7 @@
 import 'package:check_license/api/LocalNotificationServerce.dart';
 import 'package:check_license/models/license.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Databsaelicense extends ChangeNotifier {
@@ -23,7 +24,7 @@ class Databsaelicense extends ChangeNotifier {
   // Check the availability of the license by date
   void checkDate(License x) async {
   final prefs = await SharedPreferences.getInstance();
-  final notifiedKey = 'notified_${x.id}'; // assuming x.id is unique
+  final notifiedKey = 'notified_${x.name}'; // assuming x.id is unique
 
   DateTime today = DateTime.now();
   Duration diff = x.FinDate.difference(today);
@@ -42,8 +43,10 @@ class Databsaelicense extends ChangeNotifier {
       bool alreadyNotified = prefs.getBool(notifiedKey) ?? false;
       if (!alreadyNotified) {
         LocalNotificationService.showSimpleNotification(
-          'Check License',
-          'Your license will expire soon!',
+          '🔔 License Expired',
+          'Your license [${x.name}] expired on [${DateFormat.yMMMd().format(x.FinDate)}]. Please renew it.',
+          x.name,
+          x.FinDate,
         );
 
         await prefs.setBool(notifiedKey, true);
@@ -124,7 +127,7 @@ class Databsaelicense extends ChangeNotifier {
     DateTime startDate,
     DateTime FinDate,) {
     License x = License(
-      id: '10', // you shoulf fixed 
+      id: '1051', // you shoulf fixed 
       State: state,
       path: path,
       name: name,

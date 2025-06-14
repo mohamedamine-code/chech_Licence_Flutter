@@ -13,7 +13,7 @@ class LocalNotificationService {
       ),
     );
   }
-    static void showSimpleNotification(String title, String body)async {
+    static void showSimpleNotification(String title, String body,String name_license,DateTime finDate )async {
     const details = NotificationDetails(
       android: AndroidNotificationDetails(
         'channel_id',
@@ -24,7 +24,7 @@ class LocalNotificationService {
     );
 
     _notificationsPlugin.show(0, title, body, details);
-    await Mail().sendMail();
+    await Mail().sendMail(name_license,finDate);
   }
 
   static void showNotification(RemoteMessage message) {
