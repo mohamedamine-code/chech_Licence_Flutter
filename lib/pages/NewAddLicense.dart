@@ -40,7 +40,7 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'name': _nameController.text,
-          '_selectedDate': selectedDate,
+          'selectedDate': selectedDate,
           'expiryDate': expiryDate,
           'fcmToken': fcmToken,
         }),

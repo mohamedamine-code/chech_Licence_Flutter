@@ -33,7 +33,7 @@ class MyDrawer extends StatelessWidget {
                 MyListTile(
                   data: "View License",
                   icon: Icons.panorama_photosphere,
-                  onTap: () => _navigateTo(context, '/SelectDevice'),
+                  onTap: () => _navigateTo(context, '/NewSelectDevice'),
                 ),
               
                 MyListTile(

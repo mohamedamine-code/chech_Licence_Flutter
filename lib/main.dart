@@ -6,6 +6,7 @@ import 'package:check_license/models/DataBaseDevice.dart';
 import 'package:check_license/models/DataBsaeLicense.dart';
 import 'package:check_license/pages/DashBored.dart';
 import 'package:check_license/pages/NewAddLicense.dart';
+import 'package:check_license/pages/Newselectlicense.dart';
 import 'package:check_license/pages/SelectLicense.dart';
 import 'package:check_license/pages/AddLicense.dart';
 import 'package:check_license/pages/ViewArchiv.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => Dashboard(),
         '/SelectDevice': (context) => SelectLicense(),
+        '/NewSelectDevice': (context) => LicenseGridPage(),
         '/addlicense': (context) => Addlicense(),
         '/Newaddlicense': (context) => AddLicenseScreen(),
         '/ViewArchiv': (context) => ViewArchiv(),
