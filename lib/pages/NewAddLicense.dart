@@ -54,6 +54,9 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
         ).showSnackBar(SnackBar(content: Text('✅ License added')));
         _nameController.clear();
         _selectedDate = null;
+        _expiryDate=null;
+        _selectedImage=null;
+
         setState(() {});
       } else {
         ScaffoldMessenger.of(
