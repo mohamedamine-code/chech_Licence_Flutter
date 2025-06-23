@@ -47,6 +47,7 @@ dependencies:
   shared_preferences:
   mailer: ^6.4.1
   flutter_dotenv: ^5.2.1
+  http: ^1.4.0
 
 
 dev_dependencies:

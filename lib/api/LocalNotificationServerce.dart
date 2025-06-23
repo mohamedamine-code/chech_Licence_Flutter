@@ -13,6 +13,7 @@ class LocalNotificationService {
       ),
     );
   }
+  
     static void showSimpleNotification(String title, String body,String name_license,DateTime finDate )async {
     const details = NotificationDetails(
       android: AndroidNotificationDetails(

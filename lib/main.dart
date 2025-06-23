@@ -1,9 +1,11 @@
 import 'package:check_license/api/Fire_baseApi.dart';
 import 'package:check_license/api/LocalNotificationServerce.dart';
+import 'package:check_license/api/sendToken.dart';
 import 'package:check_license/firebase_options.dart';
 import 'package:check_license/models/DataBaseDevice.dart';
 import 'package:check_license/models/DataBsaeLicense.dart';
 import 'package:check_license/pages/DashBored.dart';
+import 'package:check_license/pages/NewAddLicense.dart';
 import 'package:check_license/pages/SelectLicense.dart';
 import 'package:check_license/pages/AddLicense.dart';
 import 'package:check_license/pages/ViewArchiv.dart';
@@ -19,7 +21,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print('📥 Background message received: ${message.notification?.title}');
 }
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -27,6 +28,11 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   LocalNotificationService.initialize();
   await dotenv.load(fileName: ".env");
+  // await sendLicenseData(
+  //   "mohamed",
+  //   "06/30/2025",
+  //   "FCM_Token",
+  // );
 
   runApp(
     MultiProvider(
@@ -39,10 +45,6 @@ void main() async {
   );
 }
 
-
-
-
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -53,7 +55,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => Dashboard(),
         '/SelectDevice': (context) => SelectLicense(),
         '/addlicense': (context) => Addlicense(),
-        '/ViewArchiv':(context)=>ViewArchiv(),
+        '/Newaddlicense': (context) => AddLicenseScreen(),
+        '/ViewArchiv': (context) => ViewArchiv(),
       },
     );
   }

@@ -29,7 +29,7 @@ class MyDrawer extends StatelessWidget {
                   icon: Icons.dashboard,
                   onTap: () => _navigateTo(context, '/'),
                 ),
-               
+              
                 MyListTile(
                   data: "View License",
                   icon: Icons.panorama_photosphere,
@@ -44,7 +44,7 @@ class MyDrawer extends StatelessWidget {
                 MyListTile(
                   data: "Add License",
                   icon: Icons.library_add,
-                  onTap: () => _navigateTo(context, '/addlicense'),
+                  onTap: () => _navigateTo(context, '/Newaddlicense'),
                 ),
               ],
             ),
