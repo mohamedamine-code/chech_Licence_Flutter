@@ -52,7 +52,8 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('All Licenses')),
+      appBar: AppBar(title: Text('All Licenses'),
+      centerTitle: true,),
       body: _loading
           ? Center(child: CircularProgressIndicator())
           : GridView.builder(
