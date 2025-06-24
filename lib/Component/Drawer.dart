@@ -27,7 +27,7 @@ class MyDrawer extends StatelessWidget {
                 MyListTile(
                   data: "Dashboard",
                   icon: Icons.dashboard,
-                  onTap: () => _navigateTo(context, '/'),
+                  onTap: () => _navigateTo(context, '/NEW'),
                 ),
               
                 MyListTile(

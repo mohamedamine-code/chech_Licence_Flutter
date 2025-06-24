@@ -17,8 +17,7 @@ class _DashboardPageState extends State<DashboardPage> {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body)
-          as Map<String, dynamic>; // ✅ ensure this cast
+      return jsonDecode(response.body)as Map<String, dynamic>; // ✅ ensure this cast
     } else {
       throw Exception('Failed to load licenses');
     }
@@ -27,6 +26,10 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Dashbored"),
+        centerTitle: true,
+      ),
       drawer: MyDrawer(),
       body: FutureBuilder<Map<String, dynamic>>(
         future: fetchLicenseData(),
