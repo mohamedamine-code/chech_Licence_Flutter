@@ -1,3 +1,4 @@
+import 'package:check_license/Component/Drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -50,6 +51,7 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(),
       appBar: AppBar(title: Text('All Licenses'),
       centerTitle: true,),
       body: _loading

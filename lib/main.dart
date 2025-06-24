@@ -6,6 +6,7 @@ import 'package:check_license/models/DataBaseDevice.dart';
 import 'package:check_license/models/DataBsaeLicense.dart';
 import 'package:check_license/pages/DashBored.dart';
 import 'package:check_license/pages/NewAddLicense.dart';
+import 'package:check_license/pages/NewDashBored.dart';
 import 'package:check_license/pages/Newselectlicense.dart';
 import 'package:check_license/pages/SelectLicense.dart';
 import 'package:check_license/pages/AddLicense.dart';
@@ -51,9 +52,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
+      initialRoute: '/NEW',
       routes: {
         '/': (context) => Dashboard(),
+        '/NEW': (context) => DashboardPage(),
         '/SelectDevice': (context) => SelectLicense(),
         '/NewSelectDevice': (context) => LicenseGridPage(),
         '/addlicense': (context) => Addlicense(),

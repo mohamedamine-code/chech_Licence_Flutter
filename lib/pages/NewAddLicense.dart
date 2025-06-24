@@ -84,12 +84,7 @@ void checkDate(){
           _expiryDate!,
         );
     }
-
-
 }
-
-
-
 
   void _pickDate() async {
     final now = DateTime.now();
