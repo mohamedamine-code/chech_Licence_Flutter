@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:check_license/Component/Drawer.dart';
+import 'package:check_license/api/LocalNotificationServerce.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 
 
@@ -33,7 +35,7 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
       final expiryDate = _expiryDate!.toIso8601String().split('T').first;
       final selectedDate = _selectedDate!.toIso8601String().split('T').first;
 
-      final uri = Uri.parse('http://192.168.0.56:3000/add-license',); // Replace with your server IP
+      final uri = Uri.parse('http://192.168.1.22:3000/add-license',); // Replace with your server IP
 
       final response = await http.post(
         uri,
@@ -52,6 +54,7 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text('✅ License added')));
+        checkDate();
         _nameController.clear();
         _selectedDate = null;
         _expiryDate=null;
@@ -65,9 +68,25 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
         print('❌ Failed: ${response.body}');
       }
     }
+    
   }
 
+void checkDate(){
+  print('expired date: $_expiryDate');
+    DateTime today = DateTime.now();
+    Duration diff = _expiryDate!.difference(today);
+    print('diff: $diff');
+    if(diff.inDays<30){
+      LocalNotificationService.showSimpleNotification(
+          '🔔 License Expired',
+          'Your license [${_nameController.text}] expired on [${DateFormat.yMMMd().format(_expiryDate!)}]. Please renew it.',
+          _nameController.text,
+          _expiryDate!,
+        );
+    }
 
+
+}
 
 
 
@@ -108,6 +127,7 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
     if (picked != null && picked != _expiryDate) {
       setState(() {
         _expiryDate = picked;
+        print("noppp: $_expiryDate");
       });
     }
   }
@@ -195,7 +215,7 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
-                    InkWell(
+                    GestureDetector(
                       onTap: () => _selectDateFin(context),
                       child: InputDecorator(
                         decoration: InputDecoration(

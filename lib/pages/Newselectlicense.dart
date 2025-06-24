@@ -18,9 +18,7 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
   }
 
   Future<void> fetchLicenses() async {
-    final uri = Uri.parse(
-      'http://192.168.0.56:3000/licenses',
-    ); // ← Replace with your actual backend IP
+    final uri = Uri.parse('http://192.168.1.22:3000/licenses',); // ← Replace with your actual backend IP
 
     try {
       final response = await http.get(uri);

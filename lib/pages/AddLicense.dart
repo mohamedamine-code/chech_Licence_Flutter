@@ -53,8 +53,8 @@ void _submitForm() {
       const SnackBar(content: Text('Please complete all fields')),
     );
   }
+  
 }
-
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
