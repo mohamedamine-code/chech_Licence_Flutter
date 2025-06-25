@@ -29,33 +29,37 @@ class LicenseInformation extends StatelessWidget {
     Color? backgroundColor;
     // String formattedStart = DateFormat('MM/dd/yyyy').format(StartDate);
     // String formattedEnd = DateFormat('MM/dd/yyyy').format(FinDate);
-    switch (state) {
-      case 'License is valid for more than 1 month':
-        backgroundColor = Colors.green;
-        break;
-      case 'Less than 1 month remaining': // 30 -14
-        backgroundColor = Colors.orange;
-        break;
-      case 'Less than 2 weeks remaining': //14-7
-        backgroundColor = Colors.red;
-        break;
-      case 'Less than 1 week remaining': //7-0
-        backgroundColor = Colors.red;
-        break;
-      case 'License is not currently valid': // expired
-        backgroundColor = Colors.black38;
-        break;
-    }
+    // switch (state) {
+    //   case 'License is valid for more than 1 month':
+    //     backgroundColor = Colors.green;
+    //     break;
+    //   case 'Less than 1 month remaining': // 30 -14
+    //     backgroundColor = Colors.orange;
+    //     break;
+    //   case 'Less than 2 weeks remaining': //14-7
+    //     backgroundColor = Colors.red;
+    //     break;
+    //   case 'Less than 1 week remaining': //7-0
+    //     backgroundColor = Colors.red;
+    //     break;
+    //   case 'License is not currently valid': // expired
+    //     backgroundColor = Colors.black38;
+    //     break;
+    // }
 
     return Scaffold(
-      appBar: AppBar(title: Text("License Information")),
+      appBar: AppBar(title: Text("License Information"),backgroundColor: Colors.deepPurple,),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 50,
+                ),
                 Column(
                   children: [
                     // path.isEmpty
@@ -141,27 +145,7 @@ class LicenseInformation extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    Column(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Describtion:",
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 50),
-                        Text(
-                          state,
-                          style: TextStyle(
-                            color: backgroundColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
+                    
                   ],
                 ),
                 const SizedBox(height: 50),
@@ -174,7 +158,7 @@ class LicenseInformation extends StatelessWidget {
                         ).MyLicense;
 
 
-                    // generatePdfReportSingleLicense(license[index]);
+                    generatePdfReportSingleLicense(license[index]);
 
                     
                   },
