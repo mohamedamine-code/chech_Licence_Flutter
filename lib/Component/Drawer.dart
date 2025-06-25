@@ -18,31 +18,40 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
+          // SizedBox(
+          //   height: 50,
+          // ),
           DrawerHeader(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
+              // borderRadius: BorderRadius.circular(50),
               gradient: LinearGradient(
                 colors: [Colors.deepPurple.shade400, Colors.deepPurple.shade700],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.security, size: 50, color: Colors.white),
-                const SizedBox(height: 10),
-                Text(
-                  "License Manager",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.security, size: 50, color: Colors.white),
+                  const SizedBox(height: 10),
+                  Text(
+                    "License Manager",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
+          SizedBox(
+            height: 30,
+          ),
+          
           Expanded(
             child: ListView(
               padding: const EdgeInsets.only(left: 8.0),
