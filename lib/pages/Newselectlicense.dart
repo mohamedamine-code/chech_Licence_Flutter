@@ -53,6 +53,7 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
     return Scaffold(
       drawer: MyDrawer(),
       appBar: AppBar(title: Text('All Licenses'),
+      backgroundColor: Colors.deepPurple,
       centerTitle: true,),
       body: _loading
           ? Center(child: CircularProgressIndicator())

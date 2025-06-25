@@ -149,6 +149,7 @@ void checkDate(){
       drawer: MyDrawer(),
       appBar: AppBar(
         title: Text('Add New License')),
+        backgroundColor: Colors.deepPurple,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

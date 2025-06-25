@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class DashboardPage extends StatefulWidget {
-  DashboardPage({super.key});
+  const DashboardPage({super.key});
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -17,7 +17,7 @@ class _DashboardPageState extends State<DashboardPage> {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body)as Map<String, dynamic>; // ✅ ensure this cast
+      return jsonDecode(response.body) as Map<String, dynamic>;
     } else {
       throw Exception('Failed to load licenses');
     }
@@ -25,19 +25,23 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    final titleStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+    final numberStyle = TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.deepPurple);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dashbored"),
+        title: const Text("Dashboard"),
         centerTitle: true,
+        backgroundColor: Colors.deepPurple,
       ),
       drawer: MyDrawer(),
       body: FutureBuilder<Map<String, dynamic>>(
         future: fetchLicenseData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            print('errur:${snapshot.error}');
+            print('Error: ${snapshot.error}');
             return Center(child: Text('Error: ${snapshot.error}'));
           }
 
@@ -47,19 +51,77 @@ class _DashboardPageState extends State<DashboardPage> {
           final listExpired = data['listExpired'];
           final totalList = data['totalList'];
 
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: GridView.count(
+              childAspectRatio: 6/7.8,
+              crossAxisCount: 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
               children: [
-                Text('✅ Valid Licenses: ${validList.length}'),
-                Text('⏳ Expiring Soon: ${expiringSoon.length}'),
-                Text('❌ Expired: ${listExpired.length}'),
-                Text('📊 Total: ${totalList.length}'),
-                // Optionally display detailed lists here
+                _buildCard(
+                  title: 'Total Licenses',
+                  count: totalList.length,
+                  icon: Icons.pie_chart_outline,
+                  color: Colors.blue,
+                  titleStyle: titleStyle,
+                  numberStyle: numberStyle,
+                ),
+                _buildCard(
+                  title: 'Valid Licenses',
+                  count: validList.length,
+                  icon: Icons.check_circle_outline,
+                  color: Colors.green,
+                  titleStyle: titleStyle,
+                  numberStyle: numberStyle,
+                ),
+                _buildCard(
+                  title: 'Expiring Soon',
+                  count: expiringSoon.length,
+                  icon: Icons.hourglass_top,
+                  color: Colors.orange,
+                  titleStyle: titleStyle,
+                  numberStyle: numberStyle,
+                ),
+                _buildCard(
+                  title: 'Expired',
+                  count: listExpired.length,
+                  icon: Icons.cancel_outlined,
+                  color: Colors.red,
+                  titleStyle: titleStyle,
+                  numberStyle: numberStyle,
+                ),
               ],
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildCard({
+    required String title,
+    required int count,
+    required IconData icon,
+    required Color color,
+    required TextStyle titleStyle,
+    required TextStyle numberStyle,
+  }) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 40, color: color),
+            const SizedBox(height: 12),
+            Text(title, style: titleStyle, textAlign: TextAlign.center),
+            const SizedBox(height: 8),
+            Text(count.toString(), style: numberStyle),
+          ],
+        ),
       ),
     );
   }
