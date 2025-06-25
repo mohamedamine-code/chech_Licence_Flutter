@@ -3,7 +3,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
 // for all the license of list
-Future<void> generatePdfReportAllLicense(List<License> licenses) async {
+Future<void> generatePdfReportAllLicense(List<dynamic> licenses) async {
   final pdf = pw.Document();
 
   pdf.addPage(
@@ -17,10 +17,9 @@ Future<void> generatePdfReportAllLicense(List<License> licenses) async {
             ...licenses.map((license) => pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                pw.Text('Name: ${license.name}'),
-                pw.Text('Start Date: ${license.StartDate.day}/${license.StartDate.month}/${license.StartDate.year}'),
-                pw.Text('End Date: ${license.FinDate.day}/${license.FinDate.month}/${license.FinDate.year}'),
-                pw.Text('State: ${license.State}'),
+                pw.Text('Name: ${license['name']}'),
+                pw.Text('Start Date: ${license['selectedDate']}'),
+                pw.Text('End Date: ${license['expiryDate']}'),
                 pw.Divider(),
               ],
             )),

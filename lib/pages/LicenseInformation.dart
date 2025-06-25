@@ -10,13 +10,13 @@ import 'package:provider/provider.dart';
 
 class LicenseInformation extends StatelessWidget {
   String name;
-  DateTime StartDate;
-  DateTime FinDate;
+  String ?StartDate;
+  String FinDate;
   String state;
   int index;
-  String path;
+  // String path;
   LicenseInformation({
-    required this.path,
+    // required this.path,
     required this.index,
     required this.state,
     required this.FinDate,
@@ -27,8 +27,8 @@ class LicenseInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color? backgroundColor;
-    String formattedStart = DateFormat('MM/dd/yyyy').format(StartDate);
-    String formattedEnd = DateFormat('MM/dd/yyyy').format(FinDate);
+    // String formattedStart = DateFormat('MM/dd/yyyy').format(StartDate);
+    // String formattedEnd = DateFormat('MM/dd/yyyy').format(FinDate);
     switch (state) {
       case 'License is valid for more than 1 month':
         backgroundColor = Colors.green;
@@ -58,28 +58,28 @@ class LicenseInformation extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    path.isEmpty
-                        ? SizedBox(
-                          height: 150,
-                          width: double.infinity,
-                          child: Image.asset(
-                            'assets/Rimg/none-icon-23.jpg',
-                            fit: BoxFit.contain,
-                          ),
-                        )
-                        : path.startsWith('/data') ||
-                            path.startsWith('/storage')
-                        ? SizedBox(
-                          height: 150,
-                          width: double.infinity,
-                          child: Image.file(File(path), fit: BoxFit.contain),
-                        )
-                        : SizedBox(
-                          height: 150,
-                          width: double.infinity,
-                          child: Image.asset(path, fit: BoxFit.contain),
-                        ),
-                    const SizedBox(height: 30),
+                    // path.isEmpty
+                    //     ? SizedBox(
+                    //       height: 150,
+                    //       width: double.infinity,
+                    //       child: Image.asset(
+                    //         'assets/Rimg/none-icon-23.jpg',
+                    //         fit: BoxFit.contain,
+                    //       ),
+                    //     )
+                    //     : path.startsWith('/data') ||
+                    //         path.startsWith('/storage')
+                    //     ? SizedBox(
+                    //       height: 150,
+                    //       width: double.infinity,
+                    //       child: Image.file(File(path), fit: BoxFit.contain),
+                    //     )
+                    //     : SizedBox(
+                    //       height: 150,
+                    //       width: double.infinity,
+                    //       child: Image.asset(path, fit: BoxFit.contain),
+                    //     ),
+                    // const SizedBox(height: 30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -111,7 +111,7 @@ class LicenseInformation extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          formattedStart,
+                          StartDate?? 'None',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -131,7 +131,7 @@ class LicenseInformation extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          formattedEnd,
+                          FinDate,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,

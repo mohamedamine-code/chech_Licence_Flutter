@@ -128,12 +128,12 @@ class _SelectLicenseState extends State<SelectLicense> {
                       MaterialPageRoute(
                         builder:
                             (context) => LicenseInformation(
-                              path: Mylicense[index].path,
+                              // path: Mylicense[index].path,
                               index: index,
                               state: Mylicense[index].State,
-                              FinDate: Mylicense[index].FinDate,
+                              FinDate: Mylicense[index].FinDate.toString(),
                               name: Mylicense[index].name,
-                              StartDate: Mylicense[index].StartDate,
+                              StartDate: Mylicense[index].StartDate.toString(),
                             ),
                       ),
                     );

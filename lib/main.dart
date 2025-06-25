@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/NEW',
       routes: {
-        '/': (context) => Dashboard(),
+        // '/': (context) => Dashboard(),
         '/NEW': (context) => DashboardPage(),
         '/SelectDevice': (context) => SelectLicense(),
         '/NewSelectDevice': (context) => LicenseGridPage(),
