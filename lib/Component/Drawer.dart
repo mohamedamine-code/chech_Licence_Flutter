@@ -5,9 +5,7 @@ class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
   void _navigateTo(BuildContext context, String routeName) {
-    // Close the drawer first
     Navigator.pop(context);
-    // Avoid stacking the same screen
     if (ModalRoute.of(context)?.settings.name != routeName) {
       Navigator.pushReplacementNamed(context, routeName);
     }
@@ -15,38 +13,69 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Drawer(
       child: Column(
         children: [
-          const DrawerHeader(child: Icon(Icons.storage, size: 50)),
-          const SizedBox(height: 50),
-          Padding(
-            padding: const EdgeInsets.only(left: 22.0),
+          DrawerHeader(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              gradient: LinearGradient(
+                colors: [Colors.deepPurple.shade400, Colors.deepPurple.shade700],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.security, size: 50, color: Colors.white),
+                const SizedBox(height: 10),
+                Text(
+                  "License Manager",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.only(left: 8.0),
               children: [
                 MyListTile(
                   data: "Dashboard",
-                  icon: Icons.dashboard,
+                  icon: Icons.dashboard_outlined,
                   onTap: () => _navigateTo(context, '/NEW'),
                 ),
-              
                 MyListTile(
                   data: "View License",
-                  icon: Icons.panorama_photosphere,
+                  icon: Icons.visibility_outlined,
                   onTap: () => _navigateTo(context, '/NewSelectDevice'),
                 ),
-              
                 MyListTile(
-                  data: "View archive",
-                  icon: Icons.delete,
+                  data: "View Archive",
+                  icon: Icons.archive_outlined,
                   onTap: () => _navigateTo(context, '/ViewArchiv'),
                 ),
                 MyListTile(
                   data: "Add License",
-                  icon: Icons.library_add,
+                  icon: Icons.add_circle_outline,
                   onTap: () => _navigateTo(context, '/Newaddlicense'),
                 ),
               ],
+            ),
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
+              '© 2025 Check License',
+              style: theme.textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic),
             ),
           ),
         ],
