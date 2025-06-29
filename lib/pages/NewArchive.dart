@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:check_license/Component/Drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -40,6 +41,7 @@ class _ArchiveGridPageState extends State<ArchiveGridPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(),
       appBar: AppBar(
         title: const Text('Archived Licenses'),
         backgroundColor: Colors.deepPurple,

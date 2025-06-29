@@ -234,41 +234,41 @@ void checkDate(){
                     SizedBox(height: 16),
             
                     // pick image
-                    Text(
-                      'License Logo',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 8),
-                    GestureDetector(
-                      onTap: _pickImage,
-                      child: Container(
-                        height: 150,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child:
-                            _selectedImage != null
-                                ? Image.file(_selectedImage!, fit: BoxFit.cover)
-                                : Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.add_a_photo,
-                                        size: 40,
-                                        color: Colors.grey,
-                                      ),
-                                      Text(
-                                        'Tap to add image',
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                      ),
-                    ),
+                    // Text(
+                    //   'License Logo',
+                    //   style: TextStyle(fontWeight: FontWeight.bold),
+                    // ),
+                    // SizedBox(height: 8),
+                    // GestureDetector(
+                    //   onTap: _pickImage,
+                    //   child: Container(
+                    //     height: 150,
+                    //     width: double.infinity,
+                    //     decoration: BoxDecoration(
+                    //       border: Border.all(color: Colors.grey),
+                    //       borderRadius: BorderRadius.circular(8),
+                    //     ),
+                    //     child:
+                    //         _selectedImage != null
+                    //             ? Image.file(_selectedImage!, fit: BoxFit.cover)
+                    //             : Center(
+                    //               child: Column(
+                    //                 mainAxisAlignment: MainAxisAlignment.center,
+                    //                 children: [
+                    //                   Icon(
+                    //                     Icons.add_a_photo,
+                    //                     size: 40,
+                    //                     color: Colors.grey,
+                    //                   ),
+                    //                   Text(
+                    //                     'Tap to add image',
+                    //                     style: TextStyle(color: Colors.grey),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //   ),
+                    // ),
                     SizedBox(height: 16),
                   ],
                 ),
@@ -289,8 +289,7 @@ void checkDate(){
                     onPressed:
                         (_nameController.text.isNotEmpty &&
                                 _selectedDate != null &&
-                                _expiryDate != null &&
-                                _selectedImage != null)
+                                _expiryDate != null)
                             ? _submitForm
                             : null,
                     style: ElevatedButton.styleFrom(
