@@ -69,7 +69,7 @@ class MyDrawer extends StatelessWidget {
                 MyListTile(
                   data: "View Archive",
                   icon: Icons.archive_outlined,
-                  onTap: () => _navigateTo(context, '/ViewArchiv'),
+                  onTap: () => _navigateTo(context, '/NewViewArchiv'),
                 ),
                 MyListTile(
                   data: "Add License",

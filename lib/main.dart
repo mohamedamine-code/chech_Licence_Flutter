@@ -6,6 +6,7 @@ import 'package:check_license/models/DataBaseDevice.dart';
 import 'package:check_license/models/DataBsaeLicense.dart';
 import 'package:check_license/pages/DashBored.dart';
 import 'package:check_license/pages/NewAddLicense.dart';
+import 'package:check_license/pages/NewArchive.dart';
 import 'package:check_license/pages/NewDashBored.dart';
 import 'package:check_license/pages/Newselectlicense.dart';
 import 'package:check_license/pages/SelectLicense.dart';
@@ -60,7 +61,8 @@ class MyApp extends StatelessWidget {
         '/NewSelectDevice': (context) => LicenseGridPage(),
         '/addlicense': (context) => Addlicense(),
         '/Newaddlicense': (context) => AddLicenseScreen(),
-        '/ViewArchiv': (context) => ViewArchiv(),
+        // '/ViewArchiv': (context) => ViewArchiv(),
+        '/NewViewArchiv': (context) => ArchiveGridPage(),
       },
     );
   }
