@@ -126,7 +126,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   title: 'Urgent To Renew',
                   count: urgentRenew.length,
                   icon: Icons.warning_amber_outlined,
-                  color: const Color.fromARGB(255, 249, 120, 80),
+                  color: Colors.red.shade900,
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
                   onTap: () {

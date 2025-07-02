@@ -149,20 +149,20 @@ class LicenseInformation extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 50),
-                GestureDetector(
-                  onTap: () {
-                    List<License> license =
-                        Provider.of<Databsaelicense>(
-                          context,
-                          listen: false,
-                        ).MyLicense;
-                    generatePdfReportSingleLicense(license[index]);
-                  },
-                  child: MyContainer(
-                    icon: Icons.warning_amber_rounded,
-                    data: "REPPORT",
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     List<License> license =
+                //         Provider.of<Databsaelicense>(
+                //           context,
+                //           listen: false,
+                //         ).MyLicense;
+                //     generatePdfReportSingleLicense(license[index]);
+                //   },
+                //   child: MyContainer(
+                //     icon: Icons.warning_amber_rounded,
+                //     data: "REPPORT",
+                //   ),
+                // ),
               ],
             ),
           ),

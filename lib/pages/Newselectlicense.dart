@@ -64,7 +64,29 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
     print("🚨 Error archiving license: $e");
   }
 }
+Color _getCardColor(String expiryDateStr) {
+    final now = DateTime.now();
+    DateTime expiryDate;
 
+    try {
+      expiryDate = DateTime.parse(expiryDateStr);
+    } catch (e) {
+      // If parsing fails, fallback to amber color
+      return Colors.amber;
+    }
+
+    final diffDays = expiryDate.difference(now).inDays;
+
+    if (diffDays <= 0) {
+      return Colors.red; // Expired
+    } else if (diffDays <= 30) {
+      return Colors.red.shade900; // Urgent to renew (dark red)
+    } else if (diffDays <= 200) {
+      return Colors.orange; // Expiring soon
+    } else {
+      return Colors.green; // Valid
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +122,7 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
                 itemCount: _licenses.length,
                 itemBuilder: (context, index) {
                   final license = _licenses[index];
+                  final color = _getCardColor(license['expiryDate']);
                   return GestureDetector(
                     onLongPress: () {
                       showDialog(
@@ -151,7 +174,10 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Padding(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: color,
+                        ),
                         padding: const EdgeInsets.all(12),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
