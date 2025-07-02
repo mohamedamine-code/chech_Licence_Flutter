@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class LicenseInformation extends StatelessWidget {
   String name;
-  String ?StartDate;
+  String? StartDate;
   String FinDate;
   String state;
   int index;
@@ -48,18 +48,19 @@ class LicenseInformation extends StatelessWidget {
     // }
 
     return Scaffold(
-      appBar: AppBar(title: Text("License Information"),backgroundColor: Colors.deepPurple,),
+      appBar: AppBar(
+        title: Text("License Information"),
+        backgroundColor: Colors.deepPurple,
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 50,
-                ),
+                SizedBox(height: 50),
                 Column(
                   children: [
                     // path.isEmpty
@@ -115,7 +116,7 @@ class LicenseInformation extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          StartDate?? 'None',
+                          StartDate ?? 'None',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -145,7 +146,6 @@ class LicenseInformation extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    
                   ],
                 ),
                 const SizedBox(height: 50),
@@ -156,11 +156,7 @@ class LicenseInformation extends StatelessWidget {
                           context,
                           listen: false,
                         ).MyLicense;
-
-
                     generatePdfReportSingleLicense(license[index]);
-
-                    
                   },
                   child: MyContainer(
                     icon: Icons.warning_amber_rounded,

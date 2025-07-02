@@ -10,8 +10,6 @@ import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-
-
 class AddLicenseScreen extends StatefulWidget {
   @override
   _AddLicenseScreenState createState() => _AddLicenseScreenState();
@@ -57,8 +55,8 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
         checkDate();
         _nameController.clear();
         _selectedDate = null;
-        _expiryDate=null;
-        _selectedImage=null;
+        _expiryDate = null;
+        _selectedImage = null;
 
         setState(() {});
       } else {
@@ -68,23 +66,22 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
         print('❌ Failed: ${response.body}');
       }
     }
-    
   }
 
-void checkDate(){
-  print('expired date: $_expiryDate');
+  void checkDate() {
+    print('expired date: $_expiryDate');
     DateTime today = DateTime.now();
     Duration diff = _expiryDate!.difference(today);
     print('diff: $diff');
-    if(diff.inDays<30){
+    if (diff.inDays < 30) {
       LocalNotificationService.showSimpleNotification(
-          '🔔 License Expired',
-          'Your license [${_nameController.text}] expired on [${DateFormat.yMMMd().format(_expiryDate!)}]. Please renew it.',
-          _nameController.text,
-          _expiryDate!,
-        );
+        '🔔 License Expired',
+        'Your license [${_nameController.text}] expired on [${DateFormat.yMMMd().format(_expiryDate!)}]. Please renew it.',
+        _nameController.text,
+        _expiryDate!,
+      );
     }
-}
+  }
 
   void _pickDate() async {
     final now = DateTime.now();
@@ -141,8 +138,7 @@ void checkDate(){
       });
     }
   }
-  
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,156 +146,161 @@ void checkDate(){
       appBar: AppBar(
         title: Text('Add New License'),
         backgroundColor: Colors.deepPurple,
-        ),
-        
+      ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            
-              children: [
-                /// Software Name
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'License Name',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 10),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Software Name',
-                        border: OutlineInputBorder(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                children: [
+                  /// Software Name
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'License Name',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      controller: _nameController,
-                    ),
-            
-                    SizedBox(height: 16),
-                    //start date
-                    Text(
-                      'Start Date',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-
-                    SizedBox(height: 10),
-
-                    InkWell(
-                      onTap: () => _selectDateStart(context),
-                      child: InputDecorator(
+                      SizedBox(height: 10),
+                      TextField(
                         decoration: InputDecoration(
-                          hintText: 'Start Date',
+                          hintText: 'Software Name',
                           border: OutlineInputBorder(),
                         ),
-                        child: Text(
-                          _selectedDate == null
-                              ? 'Select date'
-                              : '${_selectedDate!.toLocal()}'.split(' ')[0],
-                          style: TextStyle(
-                            color: _selectedDate == null ? Colors.grey : Colors.black,
+                        controller: _nameController,
+                      ),
+
+                      SizedBox(height: 16),
+                      //start date
+                      Text(
+                        'Start Date',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+
+                      SizedBox(height: 10),
+
+                      InkWell(
+                        onTap: () => _selectDateStart(context),
+                        child: InputDecorator(
+                          decoration: InputDecoration(
+                            hintText: 'Start Date',
+                            border: OutlineInputBorder(),
+                          ),
+                          child: Text(
+                            _selectedDate == null
+                                ? 'Select date'
+                                : '${_selectedDate!.toLocal()}'.split(' ')[0],
+                            style: TextStyle(
+                              color:
+                                  _selectedDate == null
+                                      ? Colors.grey
+                                      : Colors.black,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 16),
-            
-                    /// Expiry Date Picker
-                    Text(
-                      'Expiry Date',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 10),
-                    GestureDetector(
-                      onTap: () => _selectDateFin(context),
-                      child: InputDecorator(
-                        decoration: InputDecoration(
-                          hintText: 'Expiry Date',
-                          border: OutlineInputBorder(),
-                        ),
-                        child: Text(
-                          _expiryDate == null
-                              ? 'Select date'
-                              : '${_expiryDate!.toLocal()}'.split(' ')[0],
-                          style: TextStyle(
-                            color:
-                                _expiryDate == null ? Colors.grey : Colors.black,
+                      SizedBox(height: 16),
+
+                      /// Expiry Date Picker
+                      Text(
+                        'Expiry Date',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      GestureDetector(
+                        onTap: () => _selectDateFin(context),
+                        child: InputDecorator(
+                          decoration: InputDecoration(
+                            hintText: 'Expiry Date',
+                            border: OutlineInputBorder(),
+                          ),
+                          child: Text(
+                            _expiryDate == null
+                                ? 'Select date'
+                                : '${_expiryDate!.toLocal()}'.split(' ')[0],
+                            style: TextStyle(
+                              color:
+                                  _expiryDate == null
+                                      ? Colors.grey
+                                      : Colors.black,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 16),
-            
-                    // pick image
-                    // Text(
-                    //   'License Logo',
-                    //   style: TextStyle(fontWeight: FontWeight.bold),
-                    // ),
-                    // SizedBox(height: 8),
-                    // GestureDetector(
-                    //   onTap: _pickImage,
-                    //   child: Container(
-                    //     height: 150,
-                    //     width: double.infinity,
-                    //     decoration: BoxDecoration(
-                    //       border: Border.all(color: Colors.grey),
-                    //       borderRadius: BorderRadius.circular(8),
-                    //     ),
-                    //     child:
-                    //         _selectedImage != null
-                    //             ? Image.file(_selectedImage!, fit: BoxFit.cover)
-                    //             : Center(
-                    //               child: Column(
-                    //                 mainAxisAlignment: MainAxisAlignment.center,
-                    //                 children: [
-                    //                   Icon(
-                    //                     Icons.add_a_photo,
-                    //                     size: 40,
-                    //                     color: Colors.grey,
-                    //                   ),
-                    //                   Text(
-                    //                     'Tap to add image',
-                    //                     style: TextStyle(color: Colors.grey),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //   ),
-                    // ),
-                    SizedBox(height: 16),
-                  ],
-                ),
-            
-                /// Submit Button
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    icon: Icon(Icons.save, color: Colors.black),
-                    label: Text(
-                      'Submit',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                      SizedBox(height: 16),
+
+                      // pick image
+                      // Text(
+                      //   'License Logo',
+                      //   style: TextStyle(fontWeight: FontWeight.bold),
+                      // ),
+                      // SizedBox(height: 8),
+                      // GestureDetector(
+                      //   onTap: _pickImage,
+                      //   child: Container(
+                      //     height: 150,
+                      //     width: double.infinity,
+                      //     decoration: BoxDecoration(
+                      //       border: Border.all(color: Colors.grey),
+                      //       borderRadius: BorderRadius.circular(8),
+                      //     ),
+                      //     child:
+                      //         _selectedImage != null
+                      //             ? Image.file(_selectedImage!, fit: BoxFit.cover)
+                      //             : Center(
+                      //               child: Column(
+                      //                 mainAxisAlignment: MainAxisAlignment.center,
+                      //                 children: [
+                      //                   Icon(
+                      //                     Icons.add_a_photo,
+                      //                     size: 40,
+                      //                     color: Colors.grey,
+                      //                   ),
+                      //                   Text(
+                      //                     'Tap to add image',
+                      //                     style: TextStyle(color: Colors.grey),
+                      //                   ),
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //   ),
+                      // ),
+                      SizedBox(height: 16),
+                    ],
+                  ),
+
+                  // Submit Button
+                  Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      icon: Icon(Icons.save, color: Colors.black),
+                      label: Text(
+                        'Submit',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    onPressed:
-                        (_nameController.text.isNotEmpty &&
-                                _selectedDate != null &&
-                                _expiryDate != null)
-                            ? _submitForm
-                            : null,
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 14),
-                      textStyle: TextStyle(fontSize: 16),
+                      onPressed:
+                          (_nameController.text.isNotEmpty &&
+                                  _selectedDate != null &&
+                                  _expiryDate != null)
+                              ? _submitForm
+                              : null,
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 14),
+                        textStyle: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
             ],
           ),
         ),

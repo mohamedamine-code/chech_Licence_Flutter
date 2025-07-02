@@ -1,18 +1,14 @@
 import 'package:check_license/api/Fire_baseApi.dart';
 import 'package:check_license/api/LocalNotificationServerce.dart';
-import 'package:check_license/api/sendToken.dart';
 import 'package:check_license/firebase_options.dart';
 import 'package:check_license/models/DataBaseDevice.dart';
 import 'package:check_license/models/DataBsaeLicense.dart';
-import 'package:check_license/pages/DashBored.dart';
 import 'package:check_license/pages/NewAddLicense.dart';
 import 'package:check_license/pages/NewArchive.dart';
 import 'package:check_license/pages/NewDashBored.dart';
 import 'package:check_license/pages/Newselectlicense.dart';
 import 'package:check_license/pages/SelectLicense.dart';
 import 'package:check_license/pages/AddLicense.dart';
-import 'package:check_license/pages/ViewArchiv.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -57,9 +53,9 @@ class MyApp extends StatelessWidget {
       routes: {
         // '/': (context) => Dashboard(),
         '/NEW': (context) => DashboardPage(),
-        '/SelectDevice': (context) => SelectLicense(),
+        // '/SelectDevice': (context) => SelectLicense(),
         '/NewSelectDevice': (context) => LicenseGridPage(),
-        '/addlicense': (context) => Addlicense(),
+        // '/addlicense': (context) => Addlicense(),
         '/Newaddlicense': (context) => AddLicenseScreen(),
         // '/ViewArchiv': (context) => ViewArchiv(),
         '/NewViewArchiv': (context) => ArchiveGridPage(),
