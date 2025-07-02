@@ -51,21 +51,24 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
       });
     }
   }
+
   Future<void> archiveLicense(String id) async {
-  final uri = Uri.parse('http://192.168.1.22:3000/licenses/archive/$id'); // Replace with your endpoint
-  try {
-    final response = await http.put(uri); // or .post() depending on backend
-    if (response.statusCode == 200) {
-      print("✅ License archived");
-    } else {
-      print("❌ Failed to archive: ${response.body}");
+    final uri = Uri.parse(
+      'http://192.168.1.22:3000/licenses/archive/$id',
+    ); // Replace with your endpoint
+    try {
+      final response = await http.put(uri); // or .post() depending on backend
+      if (response.statusCode == 200) {
+        print("✅ License archived");
+      } else {
+        print("❌ Failed to archive: ${response.body}");
+      }
+    } catch (e) {
+      print("🚨 Error archiving license: $e");
     }
-  } catch (e) {
-    print("🚨 Error archiving license: $e");
   }
-}
-Color _getCardColor(String expiryDateStr) {
-    final now = DateTime.now();
+
+  Color _getCardColor(String expiryDateStr) {
     DateTime expiryDate;
 
     try {
@@ -75,7 +78,9 @@ Color _getCardColor(String expiryDateStr) {
       return Colors.amber;
     }
 
-    final diffDays = expiryDate.difference(now).inDays;
+    final now = DateTime.now();
+    final diff = expiryDate.difference(now);
+    final diffDays = (diff.inMilliseconds / (1000 * 60 * 60 * 24)).ceil();
 
     if (diffDays <= 0) {
       return Colors.red; // Expired
@@ -175,9 +180,7 @@ Color _getCardColor(String expiryDateStr) {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: color,
-                        ),
+                        decoration: BoxDecoration(color: color),
                         padding: const EdgeInsets.all(12),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

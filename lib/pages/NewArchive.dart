@@ -37,7 +37,31 @@ class _ArchiveGridPageState extends State<ArchiveGridPage> {
       debugPrint('🚨 Network error: $e');
     }
   }
+Color _getCardColor(String expiryDateStr) {
+    DateTime expiryDate;
 
+    try {
+      expiryDate = DateTime.parse(expiryDateStr);
+    } catch (e) {
+      // If parsing fails, fallback to amber color
+      return Colors.amber;
+    }
+
+   final now = DateTime.now();
+final diff = expiryDate.difference(now);
+final diffDays = (diff.inMilliseconds / (1000 * 60 * 60 * 24)).ceil();
+
+
+    if (diffDays <= 0) {
+      return Colors.red; // Expired
+    } else if (diffDays <= 30) {
+      return Colors.red.shade900; // Urgent to renew (dark red)
+    } else if (diffDays <= 200) {
+      return Colors.orange; // Expiring soon
+    } else {
+      return Colors.green; // Valid
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,12 +84,16 @@ class _ArchiveGridPageState extends State<ArchiveGridPage> {
               itemCount: _archived.length,
               itemBuilder: (context, index) {
                 final lic = _archived[index];
+                final color = _getCardColor(lic['expiryDate']);
                 return Card(
                   elevation: 3,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Padding(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: color,
+                    ),
                     padding: const EdgeInsets.all(12),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
