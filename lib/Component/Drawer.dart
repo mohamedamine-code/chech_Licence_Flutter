@@ -4,12 +4,17 @@ import 'package:flutter/material.dart';
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
-  void _navigateTo(BuildContext context, String routeName) {
-    Navigator.pop(context);
+void _navigateTo(BuildContext context, String routeName) {
+  Navigator.pop(context); // Close the drawer
+
+  // Delay navigation until after the frame is complete
+  WidgetsBinding.instance.addPostFrameCallback((_) {
     if (ModalRoute.of(context)?.settings.name != routeName) {
       Navigator.pushReplacementNamed(context, routeName);
     }
-  }
+  });
+}
+
 
   @override
   Widget build(BuildContext context) {

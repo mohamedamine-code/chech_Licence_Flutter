@@ -73,7 +73,7 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
     DateTime today = DateTime.now();
     Duration diff = _expiryDate!.difference(today);
     print('diff: $diff');
-    if (diff.inDays < 30) {
+    if (diff.inDays < 200) {
       LocalNotificationService.showSimpleNotification(
         '🔔 License Expired',
         'Your license [${_nameController.text}] expired on [${DateFormat.yMMMd().format(_expiryDate!)}]. Please renew it.',

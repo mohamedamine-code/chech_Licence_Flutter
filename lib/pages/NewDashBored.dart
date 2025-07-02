@@ -26,8 +26,15 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    final titleStyle = const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-    final numberStyle = const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.deepPurple);
+    final titleStyle = const TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+    );
+    final numberStyle = const TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: Colors.deepPurple,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -51,6 +58,7 @@ class _DashboardPageState extends State<DashboardPage> {
           final expiringSoon = data['expiringSoon'];
           final listExpired = data['listExpired'];
           final totalList = data['totalList'];
+          final UrgentRenew = data['UrgentRenew'];
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -71,10 +79,11 @@ class _DashboardPageState extends State<DashboardPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => LicenseListPage(
-                          title: 'Total Licenses',
-                          licenses: totalList,
-                        ),
+                        builder:
+                            (_) => LicenseListPage(
+                              title: 'Total Licenses',
+                              licenses: totalList,
+                            ),
                       ),
                     );
                   },
@@ -90,10 +99,11 @@ class _DashboardPageState extends State<DashboardPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => LicenseListPage(
-                          title: 'Valid Licenses',
-                          licenses: validList,
-                        ),
+                        builder:
+                            (_) => LicenseListPage(
+                              title: 'Valid Licenses',
+                              licenses: validList,
+                            ),
                       ),
                     );
                   },
@@ -109,14 +119,38 @@ class _DashboardPageState extends State<DashboardPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => LicenseListPage(
-                          title: 'Expiring Soon',
-                          licenses: expiringSoon,
-                        ),
+                        builder:
+                            (_) => LicenseListPage(
+                              title: 'Expiring Soon',
+                              licenses: expiringSoon,
+                            ),
                       ),
                     );
                   },
                 ),
+                _buildCard(
+                  title: 'Urgent To Renew',
+                  count: UrgentRenew.length,
+                  icon:
+                      Icons
+                          .warning_amber_outlined, // more appropriate for urgency
+                  color: const Color.fromARGB(255, 249, 120, 80), // more intense color for urgency
+                  titleStyle: titleStyle,
+                  numberStyle: numberStyle,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (_) => LicenseListPage(
+                              title: 'Urgent To Renew',
+                              licenses: UrgentRenew, // use the correct list
+                            ),
+                      ),
+                    );
+                  },
+                ),
+
                 _buildCard(
                   title: 'Expired',
                   count: listExpired.length,
@@ -128,10 +162,11 @@ class _DashboardPageState extends State<DashboardPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => LicenseListPage(
-                          title: 'Expired Licenses',
-                          licenses: listExpired,
-                        ),
+                        builder:
+                            (_) => LicenseListPage(
+                              title: 'Expired Licenses',
+                              licenses: listExpired,
+                            ),
                       ),
                     );
                   },
