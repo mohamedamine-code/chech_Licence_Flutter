@@ -42,7 +42,7 @@ class _DashboardPageState extends State<DashboardPage> {
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: FutureBuilder<Map<String, dynamic>>(
         future: fetchLicenseData(),
         builder: (context, snapshot) {
@@ -54,11 +54,11 @@ class _DashboardPageState extends State<DashboardPage> {
           }
 
           final data = snapshot.data!;
-          final validList = data['validList'];
-          final expiringSoon = data['expiringSoon'];
-          final listExpired = data['listExpired'];
-          final totalList = data['totalList'];
-          final UrgentRenew = data['UrgentRenew'];
+          final validList = data['validList'] as List<dynamic>;
+          final expiringSoon = data['expiringSoon'] as List<dynamic>;
+          final listExpired = data['listExpired'] as List<dynamic>;
+          final totalList = data['totalList'] as List<dynamic>;
+          final urgentRenew = data['UrgentRenew'] as List<dynamic>;
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -76,15 +76,13 @@ class _DashboardPageState extends State<DashboardPage> {
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(
-                        builder:
-                            (_) => LicenseListPage(
-                              title: 'Total Licenses',
-                              licenses: totalList,
-                            ),
-                      ),
+                      '/licenseList',
+                      arguments: {
+                        'title': 'Total Licenses',
+                        'licenses': totalList,
+                      },
                     );
                   },
                 ),
@@ -96,15 +94,13 @@ class _DashboardPageState extends State<DashboardPage> {
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(
-                        builder:
-                            (_) => LicenseListPage(
-                              title: 'Valid Licenses',
-                              licenses: validList,
-                            ),
-                      ),
+                      '/licenseList',
+                      arguments: {
+                        'title': 'Valid Licenses',
+                        'licenses': validList,
+                      },
                     );
                   },
                 ),
@@ -116,41 +112,34 @@ class _DashboardPageState extends State<DashboardPage> {
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(
-                        builder:
-                            (_) => LicenseListPage(
-                              title: 'Expiring Soon',
-                              licenses: expiringSoon,
-                            ),
-                      ),
+                      '/licenseList',
+                      arguments: {
+                        'title': 'Expiring Soon',
+                        'licenses': expiringSoon,
+                      },
                     );
                   },
                 ),
                 _buildCard(
                   title: 'Urgent To Renew',
-                  count: UrgentRenew.length,
-                  icon:
-                      Icons
-                          .warning_amber_outlined, // more appropriate for urgency
-                  color: const Color.fromARGB(255, 249, 120, 80), // more intense color for urgency
+                  count: urgentRenew.length,
+                  icon: Icons.warning_amber_outlined,
+                  color: const Color.fromARGB(255, 249, 120, 80),
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(
-                        builder:
-                            (_) => LicenseListPage(
-                              title: 'Urgent To Renew',
-                              licenses: UrgentRenew, // use the correct list
-                            ),
-                      ),
+                      '/licenseList',
+                      arguments: {
+                        'title': 'Urgent To Renew',
+                        'licenses': urgentRenew,
+                      },
                     );
                   },
                 ),
-
                 _buildCard(
                   title: 'Expired',
                   count: listExpired.length,
@@ -159,15 +148,13 @@ class _DashboardPageState extends State<DashboardPage> {
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(
-                        builder:
-                            (_) => LicenseListPage(
-                              title: 'Expired Licenses',
-                              licenses: listExpired,
-                            ),
-                      ),
+                      '/licenseList',
+                      arguments: {
+                        'title': 'Expired Licenses',
+                        'licenses': listExpired,
+                      },
                     );
                   },
                 ),
@@ -188,7 +175,7 @@ class _DashboardPageState extends State<DashboardPage> {
     required TextStyle numberStyle,
     required VoidCallback onTap,
   }) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
       child: Card(
         elevation: 4,

@@ -7,8 +7,7 @@ import 'package:check_license/pages/NewAddLicense.dart';
 import 'package:check_license/pages/NewArchive.dart';
 import 'package:check_license/pages/NewDashBored.dart';
 import 'package:check_license/pages/Newselectlicense.dart';
-import 'package:check_license/pages/SelectLicense.dart';
-import 'package:check_license/pages/AddLicense.dart';
+import 'package:check_license/pages/license_list_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +26,6 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   LocalNotificationService.initialize();
   await dotenv.load(fileName: ".env");
-  // await sendLicenseData(
-  //   "mohamed",
-  //   "06/30/2025",
-  //   "FCM_Token",
-  // );
 
   runApp(
     MultiProvider(
@@ -46,19 +40,42 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: '/NEW',
       routes: {
-        // '/': (context) => Dashboard(),
-        '/NEW': (context) => DashboardPage(),
-        // '/SelectDevice': (context) => SelectLicense(),
-        '/NewSelectDevice': (context) => LicenseGridPage(),
-        // '/addlicense': (context) => Addlicense(),
-        '/Newaddlicense': (context) => AddLicenseScreen(),
-        // '/ViewArchiv': (context) => ViewArchiv(),
-        '/NewViewArchiv': (context) => ArchiveGridPage(),
+        '/NEW': (context) => const DashboardPage(),
+        '/NewSelectDevice': (context) =>  LicenseGridPage(),
+        '/Newaddlicense': (context) =>  AddLicenseScreen(),
+        '/NewViewArchiv': (context) =>  ArchiveGridPage(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/licenseList') {
+          final args = settings.arguments as Map<String, dynamic>?;
+
+          if (args == null || !args.containsKey('title') || !args.containsKey('licenses')) {
+            return MaterialPageRoute(
+              builder: (_) => const Scaffold(
+                body: Center(child: Text('Invalid arguments for license list page')),
+              ),
+            );
+          }
+
+          return MaterialPageRoute(
+            builder: (_) => LicenseListPage(
+              title: args['title'] as String,
+              licenses: args['licenses'] as List<dynamic>,
+            ),
+          );
+        }
+        // Unknown route fallback
+        return MaterialPageRoute(
+          builder: (_) => const Scaffold(
+            body: Center(child: Text('Page not found')),
+          ),
+        );
       },
     );
   }

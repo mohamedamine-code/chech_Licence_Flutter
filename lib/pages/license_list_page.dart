@@ -1,3 +1,4 @@
+import 'package:check_license/Component/Drawer.dart';
 import 'package:flutter/material.dart';
 
 class LicenseListPage extends StatelessWidget {
@@ -10,6 +11,9 @@ class LicenseListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: (){
+          Navigator.pushNamed(context, '/NEW');
+        }, icon: Icon(Icons.arrow_back)),
         title: Text(title),
         backgroundColor: Colors.deepPurple,
       ),

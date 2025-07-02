@@ -4,17 +4,12 @@ import 'package:flutter/material.dart';
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
-void _navigateTo(BuildContext context, String routeName) {
-  Navigator.pop(context); // Close the drawer
-
-  // Delay navigation until after the frame is complete
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    if (ModalRoute.of(context)?.settings.name != routeName) {
-      Navigator.pushReplacementNamed(context, routeName);
-    }
-  });
-}
-
+  void _navigateTo(BuildContext context, String routeName) {
+    Navigator.pop(context); // Close drawer first
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.pushNamed(context, routeName);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +25,10 @@ void _navigateTo(BuildContext context, String routeName) {
             decoration: BoxDecoration(
               // borderRadius: BorderRadius.circular(50),
               gradient: LinearGradient(
-                colors: [Colors.deepPurple.shade400, Colors.deepPurple.shade700],
+                colors: [
+                  Colors.deepPurple.shade400,
+                  Colors.deepPurple.shade700,
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -53,10 +51,8 @@ void _navigateTo(BuildContext context, String routeName) {
               ),
             ),
           ),
-          SizedBox(
-            height: 30,
-          ),
-          
+          SizedBox(height: 30),
+
           Expanded(
             child: ListView(
               padding: const EdgeInsets.only(left: 8.0),
@@ -89,7 +85,9 @@ void _navigateTo(BuildContext context, String routeName) {
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Text(
               '© 2025 Check License',
-              style: theme.textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic),
+              style: theme.textTheme.bodySmall?.copyWith(
+                fontStyle: FontStyle.italic,
+              ),
             ),
           ),
         ],
