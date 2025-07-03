@@ -51,32 +51,38 @@ class MyApp extends StatelessWidget {
         '/Newaddlicense': (context) =>  AddLicenseScreen(),
         '/NewViewArchiv': (context) =>  ArchiveGridPage(),
       },
-      onGenerateRoute: (settings) {
-        if (settings.name == '/licenseList') {
-          final args = settings.arguments as Map<String, dynamic>?;
+      // onGenerateRoute: (settings) {
+      //   if (settings.name == '/licenseList') {
+      //     final args = settings.arguments as Map<String, dynamic>?;
 
-          if (args == null || !args.containsKey('title') || !args.containsKey('licenses')) {
-            return MaterialPageRoute(
-              builder: (_) => const Scaffold(
-                body: Center(child: Text('Invalid arguments for license list page')),
-              ),
-            );
-          }
+      //     if (args == null || !args.containsKey('title') || !args.containsKey('licenses')) {
+      //       return MaterialPageRoute(
+      //         builder: (_) => const Scaffold(
+      //           body: Center(child: Text('Invalid arguments for license list page')),
+      //         ),
+      //       );
+      //     }
 
-          return MaterialPageRoute(
-            builder: (_) => LicenseListPage(
-              title: args['title'] as String,
-              licenses: args['licenses'] as List<dynamic>,
-            ),
-          );
-        }
-        // Unknown route fallback
-        return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(child: Text('Page not found')),
-          ),
-        );
-      },
+      //     return MaterialPageRoute(
+      //       builder: (_) => LicenseListPage(
+      //         title: args['title'] as String,
+      //         licenses: args['licenses'] as List<dynamic>,
+      //       ),
+      //     );
+      //   }
+      //   // Unknown route fallback
+      //   return MaterialPageRoute(
+      //     builder: (_) => const Scaffold(
+      //       body: Center(child: Text('Page not found')),
+      //     ),
+      //   );
+      // },
+    
+    
+    
+    
+    
+    
     );
   }
 }

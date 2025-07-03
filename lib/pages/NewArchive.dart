@@ -20,7 +20,7 @@ class _ArchiveGridPageState extends State<ArchiveGridPage> {
   }
 
   Future<void> fetchArchivedLicenses() async {
-    final uri = Uri.parse('http://192.168.1.22:3000/licenses/archives');
+    final uri = Uri.parse('http://172.16.12.86:3000/licenses/archives');
     try {
       final response = await http.get(uri);
       if (response.statusCode == 200) {
@@ -70,6 +70,9 @@ final diffDays = (diff.inMilliseconds / (1000 * 60 * 60 * 24)).ceil();
         title: const Text('Archived Licenses'),
         backgroundColor: Colors.deepPurple,
         centerTitle: true,
+        leading: Builder(builder: (context)=>IconButton(onPressed: (){
+          Scaffold.of(context).openDrawer();
+        }, icon: Icon(Icons.menu))),
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator())

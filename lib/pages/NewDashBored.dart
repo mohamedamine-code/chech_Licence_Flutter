@@ -12,9 +12,11 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  bool _isNavigating = false;
+
   Future<Map<String, dynamic>> fetchLicenseData() async {
     final response = await http.get(
-      Uri.parse('http://192.168.1.22:3000/licensesDash'),
+      Uri.parse('http://172.16.12.86:3000/licensesDash'),
     );
 
     if (response.statusCode == 200) {
@@ -22,6 +24,20 @@ class _DashboardPageState extends State<DashboardPage> {
     } else {
       throw Exception('Failed to load licenses');
     }
+  }
+
+  void _navigateToLicenseList(String title, List licenses) {
+    if (_isNavigating) return; // Prevent multiple rapid taps
+    _isNavigating = true;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => LicenseListPage(title: title, licenses: licenses),
+      ),
+    ).then((_) {
+      _isNavigating = false; // Reset flag when returned
+    });
   }
 
   @override
@@ -41,6 +57,9 @@ class _DashboardPageState extends State<DashboardPage> {
         title: const Text("Dashboard"),
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
+        leading: Builder(builder: (context)=>IconButton(onPressed: (){
+          Scaffold.of(context).openDrawer();
+        }, icon: Icon(Icons.menu))),
       ),
       drawer: const MyDrawer(),
       body: FutureBuilder<Map<String, dynamic>>(
@@ -54,11 +73,11 @@ class _DashboardPageState extends State<DashboardPage> {
           }
 
           final data = snapshot.data!;
-          final validList = data['validList'] as List<dynamic>;
-          final expiringSoon = data['expiringSoon'] as List<dynamic>;
-          final listExpired = data['listExpired'] as List<dynamic>;
-          final totalList = data['totalList'] as List<dynamic>;
-          final urgentRenew = data['UrgentRenew'] as List<dynamic>;
+          final validList = data['validList'] as List<dynamic>? ?? [];
+          final expiringSoon = data['expiringSoon'] as List<dynamic>? ?? [];
+          final listExpired = data['listExpired'] as List<dynamic>? ?? [];
+          final totalList = data['totalList'] as List<dynamic>? ?? [];
+          final urgentRenew = data['UrgentRenew'] as List<dynamic>? ?? [];
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -75,16 +94,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   color: Colors.blue,
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/licenseList',
-                      arguments: {
-                        'title': 'Total Licenses',
-                        'licenses': totalList,
-                      },
-                    );
-                  },
+                  onTap: () => _navigateToLicenseList('Total Licenses', totalList),
                 ),
                 _buildCard(
                   title: 'Valid Licenses',
@@ -93,16 +103,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   color: Colors.green,
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/licenseList',
-                      arguments: {
-                        'title': 'Valid Licenses',
-                        'licenses': validList,
-                      },
-                    );
-                  },
+                  onTap: () => _navigateToLicenseList('Valid Licenses', validList),
                 ),
                 _buildCard(
                   title: 'Expiring Soon',
@@ -111,34 +112,16 @@ class _DashboardPageState extends State<DashboardPage> {
                   color: Colors.orange,
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/licenseList',
-                      arguments: {
-                        'title': 'Expiring Soon',
-                        'licenses': expiringSoon,
-                      },
-                    );
-                  },
+                  onTap: () => _navigateToLicenseList('Expiring Soon', expiringSoon),
                 ),
                 _buildCard(
                   title: 'Urgent To Renew',
                   count: urgentRenew.length,
                   icon: Icons.warning_amber_outlined,
-                  color: Colors.red.shade900,
+                  color: const Color.fromARGB(255, 249, 120, 80),
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/licenseList',
-                      arguments: {
-                        'title': 'Urgent To Renew',
-                        'licenses': urgentRenew,
-                      },
-                    );
-                  },
+                  onTap: () => _navigateToLicenseList('Urgent To Renew', urgentRenew),
                 ),
                 _buildCard(
                   title: 'Expired',
@@ -147,16 +130,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   color: Colors.red,
                   titleStyle: titleStyle,
                   numberStyle: numberStyle,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/licenseList',
-                      arguments: {
-                        'title': 'Expired Licenses',
-                        'licenses': listExpired,
-                      },
-                    );
-                  },
+                  onTap: () => _navigateToLicenseList('Expired Licenses', listExpired),
                 ),
               ],
             ),

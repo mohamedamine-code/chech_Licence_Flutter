@@ -22,7 +22,7 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
 
   Future<void> fetchLicenses() async {
     final uri = Uri.parse(
-      'http://192.168.1.22:3000/licenses',
+      'http://172.16.12.86:3000/licenses',
     ); // ← Replace with your actual backend IP
 
     try {
@@ -54,7 +54,7 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
 
   Future<void> archiveLicense(String id) async {
     final uri = Uri.parse(
-      'http://192.168.1.22:3000/licenses/archive/$id',
+      'http://172.16.12.86:3000/licenses/archive/$id',
     ); // Replace with your endpoint
     try {
       final response = await http.put(uri); // or .post() depending on backend
@@ -112,6 +112,9 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
         title: Text('All Licenses'),
         backgroundColor: Colors.deepPurple,
         centerTitle: true,
+        leading: Builder(builder: (context)=>IconButton(onPressed: (){
+          Scaffold.of(context).openDrawer();
+        }, icon: Icon(Icons.menu))),
       ),
       body:
           _loading
