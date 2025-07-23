@@ -7,7 +7,6 @@ import 'package:check_license/pages/NewAddLicense.dart';
 import 'package:check_license/pages/NewArchive.dart';
 import 'package:check_license/pages/NewDashBored.dart';
 import 'package:check_license/pages/Newselectlicense.dart';
-import 'package:check_license/pages/license_list_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
