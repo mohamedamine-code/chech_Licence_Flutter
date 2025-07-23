@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "782956789905",
-    "project_id": "flutterapp-c2a2e",
-    "storage_bucket": "flutterapp-c2a2e.firebasestorage.app"
+    "project_number": "151967801739",
+    "project_id": "licesne-f75d8",
+    "storage_bucket": "licesne-f75d8.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:782956789905:android:3901ef889ad4c9805f7f30",
+        "mobilesdk_app_id": "1:151967801739:android:e3ad4529f9dd789d1e0f8e",
         "android_client_info": {
           "package_name": "com.example.check_license"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCTHhbs8xAnZSmfB9P_xiEIfY9HBZHpjL4"
+          "current_key": "AIzaSyBjNSxAbXOnNVF4J6zimLqA9SXbyCTconM"
         }
       ],
       "services": {

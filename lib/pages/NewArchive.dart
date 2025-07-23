@@ -20,7 +20,7 @@ class _ArchiveGridPageState extends State<ArchiveGridPage> {
   }
 
   Future<void> fetchArchivedLicenses() async {
-    final uri = Uri.parse('http://172.16.12.86:3000/licenses/archives');
+    final uri = Uri.parse('https://send-fcm.onrender.com/licenses/archives');
     try {
       final response = await http.get(uri);
       if (response.statusCode == 200) {

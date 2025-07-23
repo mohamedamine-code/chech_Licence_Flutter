@@ -22,7 +22,7 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
 
   Future<void> fetchLicenses() async {
     final uri = Uri.parse(
-      'http://172.16.12.86:3000/licenses',
+      'https://send-fcm.onrender.com/licenses',
     ); // ← Replace with your actual backend IP
 
     try {
@@ -54,7 +54,7 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
 
   Future<void> archiveLicense(String id) async {
     final uri = Uri.parse(
-      'http://172.16.12.86:3000/licenses/archive/$id',
+      'https://send-fcm.onrender.com/licenses/archive/$id',
     ); // Replace with your endpoint
     try {
       final response = await http.put(uri); // or .post() depending on backend
@@ -139,7 +139,7 @@ class _LicenseGridPageState extends State<LicenseGridPage> {
                             (context) => AlertDialog(
                               title: Text("Archive License"),
                               content: Text(
-                                "Do you want to move this license to archive?",
+                                "Do you want to move this license to archive ?",
                               ),
                               actions: [
                                 TextButton(

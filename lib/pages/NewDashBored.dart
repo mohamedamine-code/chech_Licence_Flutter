@@ -16,7 +16,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Future<Map<String, dynamic>> fetchLicenseData() async {
     final response = await http.get(
-      Uri.parse('http://172.16.12.86:3000/licensesDash'),
+      Uri.parse('https://send-fcm.onrender.com/licensesDash'),
     );
 
     if (response.statusCode == 200) {

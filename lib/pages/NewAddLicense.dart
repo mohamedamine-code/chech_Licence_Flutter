@@ -33,7 +33,7 @@ class _AddLicenseScreenState extends State<AddLicenseScreen> {
       final expiryDate = _expiryDate!.toIso8601String().split('T').first;
       final selectedDate = _selectedDate!.toIso8601String().split('T').first;
 
-      final uri = Uri.parse('http://172.16.12.86:3000/add-license',); // Replace with your server IP
+      final uri = Uri.parse('https://send-fcm.onrender.com/add-license',); // Replace with your server IP
 
       final response = await http.post(
         uri,

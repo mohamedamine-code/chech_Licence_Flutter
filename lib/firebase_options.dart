@@ -23,10 +23,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -59,11 +56,20 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCTHhbs8xAnZSmfB9P_xiEIfY9HBZHpjL4',
-    appId: '1:782956789905:android:3901ef889ad4c9805f7f30',
-    messagingSenderId: '782956789905',
-    projectId: 'flutterapp-c2a2e',
-    storageBucket: 'flutterapp-c2a2e.firebasestorage.app',
+    apiKey: 'AIzaSyBjNSxAbXOnNVF4J6zimLqA9SXbyCTconM',
+    appId: '1:151967801739:android:e3ad4529f9dd789d1e0f8e',
+    messagingSenderId: '151967801739',
+    projectId: 'licesne-f75d8',
+    storageBucket: 'licesne-f75d8.firebasestorage.app',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyAjk9752a5vpDbE9PNo1_bQVK4IN8iz3Ik',
+    appId: '1:151967801739:ios:9a1c7e5279ae001c1e0f8e',
+    messagingSenderId: '151967801739',
+    projectId: 'licesne-f75d8',
+    storageBucket: 'licesne-f75d8.firebasestorage.app',
+    iosBundleId: 'com.example.checkLicense',
   );
 
 }
